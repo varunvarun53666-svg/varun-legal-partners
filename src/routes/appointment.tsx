@@ -93,16 +93,16 @@ function Appointment() {
 
         {step === 1 && (
           <form onSubmit={submit1} className="card-soft grid gap-5 p-6 md:grid-cols-2 md:p-8" noValidate>
-            <div className="md:col-span-2"><label className={label} htmlFor="name">Full name *</label><input id="name" className="field" value={f.name} onChange={set("name")} maxLength={100} />{err.name && <p className="mt-1 text-xs text-destructive">{err.name}</p>}</div>
+            <div className="md:col-span-2"><label className={label} htmlFor="name">Full name *</label><input id="name" className="field" value={f.name} onChange={set("name")} maxLength={100} />{err["name"] && <p className="mt-1 text-xs text-destructive">{err["name"]}</p>}</div>
             <div><label className={label} htmlFor="mobile">Mobile *</label>
               <div className="flex"><span className="flex items-center rounded-l-md border border-r-0 border-input bg-muted px-3 text-sm">+91</span>
                 <input id="mobile" inputMode="numeric" className="field rounded-l-none" value={f.mobile} onChange={(e) => setF({ ...f, mobile: e.target.value.replace(/\D/g, "").slice(0, 10) })} /></div>
-              {err.mobile && <p className="mt-1 text-xs text-destructive">{err.mobile}</p>}</div>
-            <div><label className={label} htmlFor="email">Email</label><input id="email" type="email" className="field" value={f.email} onChange={set("email")} />{err.email && <p className="mt-1 text-xs text-destructive">{err.email}</p>}</div>
+              {err["mobile"] && <p className="mt-1 text-xs text-destructive">{err["mobile"]}</p>}</div>
+            <div><label className={label} htmlFor="email">Email</label><input id="email" type="email" className="field" value={f.email} onChange={set("email")} />{err["email"] && <p className="mt-1 text-xs text-destructive">{err["email"]}</p>}</div>
             <div className="md:col-span-2"><label className={label} htmlFor="address">Address</label><input id="address" className="field" value={f.address} onChange={set("address")} maxLength={300} /></div>
             <div className="md:col-span-2"><label className={label} htmlFor="type">Consultation type *</label>
               <select id="type" className="field" value={f.type} onChange={set("type")}><option value="">Select…</option>{TYPES.map((t) => <option key={t}>{t}</option>)}</select>
-              {err.type && <p className="mt-1 text-xs text-destructive">{err.type}</p>}</div>
+              {err["type"] && <p className="mt-1 text-xs text-destructive">{err["type"]}</p>}</div>
             <div className="md:col-span-2"><label className={label} htmlFor="notes">Notes</label><textarea id="notes" rows={4} className="field" value={f.notes} onChange={set("notes")} maxLength={1000} /></div>
             <button className="btn-primary md:col-span-2">Proceed to Select Date &amp; Time</button>
           </form>

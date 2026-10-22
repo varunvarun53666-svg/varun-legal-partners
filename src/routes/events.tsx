@@ -32,7 +32,7 @@ function Events() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/90 p-4 animate-in fade-in" role="dialog" aria-modal="true" onClick={() => setI(null)}>
           <button aria-label="Close" className="absolute right-4 top-4 text-navy-foreground"><X className="h-8 w-8" /></button>
           <button aria-label="Previous" className="absolute left-4 text-navy-foreground" onClick={(e) => { e.stopPropagation(); setI((i - 1 + PHOTOS.length) % PHOTOS.length); }}><ChevronLeft className="h-10 w-10" /></button>
-          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-3xl"><ImageSlot label={PHOTOS[i]} className="aspect-[4/3] rounded-xl" /></div>
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-3xl"><ImageSlot label={PHOTOS[i]!} className="aspect-[4/3] rounded-xl" /></div>
           <button aria-label="Next" className="absolute right-4 text-navy-foreground" onClick={(e) => { e.stopPropagation(); setI((i + 1) % PHOTOS.length); }}><ChevronRight className="h-10 w-10" /></button>
         </div>
       )}

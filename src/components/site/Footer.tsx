@@ -44,7 +44,7 @@ export function Footer() {
           <p className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-amber" /><a className={a} href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
           {[["Head Office", HEAD_OFFICE], ["Branch", BRANCH]].map(([t, addr]) => (
             <p key={t} className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-amber" /><span><strong>{t}:</strong> <span className="text-navy-foreground/80">{addr}</span><br />
-              <a className="text-amber underline-offset-2 hover:underline" href={mapLink(addr)} target="_blank" rel="noreferrer">View on Map</a></span></p>
+              <a className="text-amber underline-offset-2 hover:underline" href={mapLink(addr!)} target="_blank" rel="noreferrer">View on Map</a></span></p>
           ))}
           <p className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-amber" />Mon–Sat: 9 AM – 9 PM</p>
         </div>

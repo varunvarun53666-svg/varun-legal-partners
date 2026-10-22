@@ -44,7 +44,7 @@ function Contact() {
           <p className="section-title">Get in touch</p>
           <h2 className="text-3xl">Visit or call our office</h2>
           {[["Head Office", HEAD_OFFICE], ["Branch", BRANCH]].map(([t, a]) => (
-            <div key={t} className="card-soft flex gap-4 p-5"><MapPin className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">{t}</h3><p className="text-sm text-muted-foreground">{a}</p><a href={mapLink(a)} target="_blank" rel="noreferrer" className="text-sm font-semibold text-amber hover:underline">View on Map</a></div></div>
+            <div key={t} className="card-soft flex gap-4 p-5"><MapPin className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">{t}</h3><p className="text-sm text-muted-foreground">{a}</p><a href={mapLink(a!)} target="_blank" rel="noreferrer" className="text-sm font-semibold text-amber hover:underline">View on Map</a></div></div>
           ))}
           <div className="card-soft flex gap-4 p-5"><Clock className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">Office hours</h3><p className="text-sm text-muted-foreground">Monday – Saturday: 9:00 AM – 9:00 PM<br />Sunday: Closed</p></div></div>
           <div className="card-soft flex gap-4 p-5"><Phone className="h-6 w-6 shrink-0 text-primary" /><div className="text-sm"><a href="tel:+919845000000" className="block hover:text-primary">{PHONE_1}</a><a href="tel:+918040000000" className="block hover:text-primary">{PHONE_2}</a><a href={`mailto:${EMAIL}`} className="mt-1 flex items-center gap-1 hover:text-primary"><Mail className="h-4 w-4" />{EMAIL}</a></div></div>

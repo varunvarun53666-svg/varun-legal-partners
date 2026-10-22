@@ -7,7 +7,7 @@ export function FadeIn({ children, className, delay = 0 }: { children: ReactNode
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { el.classList.add("is-visible"); io.disconnect(); }
+      if (e?.isIntersecting) { el.classList.add("is-visible"); io.disconnect(); }
     }, { threshold: 0.12 });
     io.observe(el);
     return () => io.disconnect();
