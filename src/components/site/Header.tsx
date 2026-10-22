@@ -26,11 +26,7 @@ function Dropdown({ label, items, active }: { label: string; items: { to: string
         <div className="absolute right-0 top-full z-50 w-72 pt-2">
           <div className="card-soft animate-in fade-in slide-in-from-top-2 py-2">
             {items.map((i) => (
-              <a key={i.to} href={i.to} onClick={(e) => { e.preventDefault(); setOpen(false); window.dispatchEvent(new CustomEvent("nav", { detail: i.to })); }}
-                className="hidden" aria-hidden />
-            ))}
-            {items.map((i) => (
-              <Link key={i.to} to={i.to} onClick={() => setOpen(false)} activeProps={{ className: "text-amber" }}
+              <Link key={i.to} to={i.to as never} onClick={() => setOpen(false)} activeProps={{ className: "text-amber" }}
                 className="block px-4 py-2 text-sm text-foreground transition-colors hover:bg-accent hover:text-amber">{i.label}</Link>
             ))}
           </div>
@@ -47,7 +43,7 @@ export function Header() {
   useEffect(() => { setMobile(false); }, [path]);
 
   const top = (to: string, label: string) => (
-    <Link to={to} className={cn("py-2 font-medium transition-colors hover:text-amber", path === to ? "text-amber" : "text-navy")}>{label}</Link>
+    <Link to={to as never} className={cn("py-2 font-medium transition-colors hover:text-amber", path === to ? "text-amber" : "text-navy")}>{label}</Link>
   );
 
   return (
@@ -83,7 +79,7 @@ export function Header() {
                   {open && (
                     <div className="pb-3 pl-3">
                       {(items as typeof moreLinks).map((i) => (
-                        <Link key={i.to} to={i.to} activeProps={{ className: "text-amber" }} className="block py-2 text-base text-muted-foreground">{i.label}</Link>
+                        <Link key={i.to} to={i.to as never} activeProps={{ className: "text-amber" }} className="block py-2 text-base text-muted-foreground">{i.label}</Link>
                       ))}
                     </div>
                   )}
