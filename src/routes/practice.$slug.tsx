@@ -28,7 +28,7 @@ function Practice() {
       </section>
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-14 sm:grid-cols-2 lg:grid-cols-3">
         {a.services.map((s, k) => {
-          const Icon = ICONS[k % ICONS.length];
+          const Icon = ICONS[k % ICONS.length]!;
           return (
             <FadeIn key={s.title} delay={k * 80}>
               <div className="card-soft h-full p-6 hover:-translate-y-1">

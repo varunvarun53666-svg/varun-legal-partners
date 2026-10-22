@@ -39,7 +39,7 @@ function Counter({ to, label, suffix = "+" }: { to: number; label: string; suffi
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return; io.disconnect();
+      if (!e?.isIntersecting) return; io.disconnect();
       const start = performance.now();
       const step = (t: number) => { const p = Math.min(1, (t - start) / 1800); setV(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(step); };
       requestAnimationFrame(step);
@@ -124,9 +124,9 @@ function Home() {
         <p className="section-title">Testimonials</p><h2 className="mt-2 text-3xl md:text-4xl">What our clients say</h2>
         <div className="card-soft mt-10 p-8">
           <Quote className="mx-auto h-8 w-8 text-amber" aria-hidden />
-          <p key={ti} className="mt-4 text-lg italic text-muted-foreground animate-in fade-in">“{TESTIMONIALS[ti].text}”</p>
-          <p className="mt-5 font-display font-semibold text-navy">{TESTIMONIALS[ti].name}</p>
-          <p className="text-xs text-muted-foreground">{TESTIMONIALS[ti].date}</p>
+          <p key={ti} className="mt-4 text-lg italic text-muted-foreground animate-in fade-in">“{TESTIMONIALS[ti]!.text}”</p>
+          <p className="mt-5 font-display font-semibold text-navy">{TESTIMONIALS[ti]!.name}</p>
+          <p className="text-xs text-muted-foreground">{TESTIMONIALS[ti]!.date}</p>
         </div>
         <div className="mt-6 flex justify-center gap-2">
           {TESTIMONIALS.map((_, k) => <button key={k} aria-label={`Testimonial ${k + 1}`} onClick={() => setTi(k)} className={cn("h-2.5 rounded-full transition-all", k === ti ? "w-7 bg-primary" : "w-2.5 bg-navy/30")} />)}
