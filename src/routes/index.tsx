@@ -50,29 +50,28 @@ function Counter({ to, label, suffix = "+" }: { to: number; label: string; suffi
   return <div ref={ref} className="text-center"><div className="font-display text-4xl font-bold text-amber md:text-5xl">{v.toLocaleString("en-IN")}{suffix}</div><div className="mt-2 text-sm text-navy-foreground/80">{label}</div></div>;
 }
 
+function BannerSlide({ name, alt }: { name: string; alt: string }) {
+  return (
+    <div className="w-full">
+      <ImageSlot label={`${name} banner – desktop`} alt={alt} className="hidden aspect-[1920/700] w-full md:flex" />
+      <ImageSlot label={`${name} banner – mobile`} alt={alt} className="aspect-[1080/1350] w-full md:hidden" />
+    </div>
+  );
+}
+
 function Home() {
+
   const slides = [
     ...PRACTICE_AREAS.map((p) => (
-      <div key={p.slug} className="grid min-h-[480px] items-center gap-6 bg-accent px-6 py-10 md:grid-cols-2 md:gap-8 md:px-16 md:py-12">
-        <ImageSlot label={`${p.name} hero image`} className="h-56 rounded-xl md:h-80" />
-        <div className="pb-8 md:pb-0">
-          <p className="section-title">Practice Area</p>
-          <h2 className="mt-2 text-3xl md:text-4xl">{p.name}</h2>
-          <ul className="mt-4 grid grid-cols-2 gap-2 text-sm">{p.services.slice(0, 4).map((s) => <li key={s.title} className="before:mr-2 before:text-primary before:content-['▸']">{s.title}</li>)}</ul>
-          <p className="mt-5 flex items-center gap-2 font-semibold text-navy"><Phone className="h-4 w-4 text-primary" /> Call {PHONE_1}</p>
-          <Link to="/practice/$slug" params={{ slug: p.slug }} className="btn-primary mt-6">Learn more</Link>
-        </div>
-      </div>
+      <BannerSlide key={p.slug} name={p.name} alt={`${p.name} banner with the heading “${p.name}” and the tagline “${p.short}”.`} />
     )),
-    <div key="team" className="relative min-h-[480px]">
-      <ImageSlot label="Team group photo" className="absolute inset-0" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-navy/60 px-6 text-center">
-        <h2 className="text-3xl text-navy-foreground md:text-5xl">Our Team, Your Advocates</h2>
-        <p className="mt-3 text-navy-foreground/85">Experienced advocates serving Bengaluru with care and clarity.</p>
-        <Link to="/appointment" className="btn-primary mt-6">Book a consultation</Link>
-      </div>
-    </div>,
+    <BannerSlide
+      key="team"
+      name="Our Team"
+      alt="Team banner with the heading “Our Team, Your Advocates” and the line “Experienced advocates serving Bengaluru with care and clarity”."
+    />,
   ];
+
   const [ti, setTi] = useAuto(TESTIMONIALS.length, 6000);
 
   return (
