@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ImageSlot } from "@/components/site/ImageSlot";
 import { FadeIn } from "@/components/site/FadeIn";
-import { PHONE_1, PRACTICE_AREAS, TEAM, TESTIMONIALS } from "@/lib/site";
+import { PRACTICE_AREAS, TEAM, TESTIMONIALS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
