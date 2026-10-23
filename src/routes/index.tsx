@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronLeft, ChevronRight, Phone, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ImageSlot } from "@/components/site/ImageSlot";
 import { FadeIn } from "@/components/site/FadeIn";
