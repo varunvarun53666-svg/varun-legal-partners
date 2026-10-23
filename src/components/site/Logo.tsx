@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { Landmark } from "lucide-react";
+import { ImageSlot } from "./ImageSlot";
 
 export function Logo({ light = false }: { light?: boolean }) {
   return (
     <Link to="/" className="flex items-center gap-3" aria-label="Vidyacharan home">
-      <div className="hidden h-11 w-14 items-center justify-center rounded bg-slot text-[9px] text-muted-foreground sm:flex" role="img" aria-label="Header image">Header img</div>
+      <ImageSlot label="Law office" className="hidden h-11 w-14 rounded sm:block" loading="eager" />
       <Landmark className={light ? "h-7 w-7 text-amber" : "h-7 w-7 text-primary"} aria-hidden />
       <div className="leading-tight">
         <div className={`font-display text-2xl font-bold tracking-[0.2em] ${light ? "text-navy-foreground" : "text-navy"}`}>VIDYACHARAN</div>

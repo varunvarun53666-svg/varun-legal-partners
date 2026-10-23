@@ -1,12 +1,13 @@
-import { ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { imageForLabel } from "@/lib/site-images";
 
-export function ImageSlot({ label, alt, className }: { label: string; alt?: string; className?: string }) {
+export function ImageSlot({ label, className, loading = "lazy" }: { label: string; alt?: string; className?: string; loading?: "eager" | "lazy" }) {
+  const image = imageForLabel(label);
+  const banner = /banner|background/.test(label.toLowerCase());
   return (
-    <div role="img" aria-label={alt ?? label} className={cn("flex flex-col items-center justify-center gap-2 bg-slot text-muted-foreground", className)}>
-
-      <ImageIcon className="h-6 w-6 opacity-60" aria-hidden />
-      <span className="px-2 text-center text-xs font-medium">{label}</span>
-    </div>
+    <picture className={cn("relative block overflow-hidden", className)}>
+      {banner && <source media="(max-width: 767px)" srcSet={image.mobile} />}
+      <img src={banner ? image.wide : image.card} alt={image.alt} width={banner ? 1920 : 960} height={banner ? 700 : 480} loading={loading} decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+    </picture>
   );
 }
