@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-const KEY = "varun_disclaimer_agreed";
+const KEY = "vidyacharan_disclaimer_agreed";
 const POINTS = [
   "The Bar Council of India does not permit advocates to advertise or solicit work in any form. This website is not an advertisement or solicitation of any kind.",
-  "By clicking “I Agree”, you confirm that you are visiting this site of your own accord to seek information about Varun Advocates & Legal Consultants.",
+  "By clicking “I Agree”, you confirm that you are visiting this site of your own accord to seek information about Vidyacharan Advocates & Legal Consultants.",
   "All content on this website is provided for general information purposes only.",
   "Viewing this website or contacting us through it does not create an advocate-client relationship.",
   "Nothing on this website is, or should be read as, legal advice. Please consult a qualified advocate for advice on your specific matter.",

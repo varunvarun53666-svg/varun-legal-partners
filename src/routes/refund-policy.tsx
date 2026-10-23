@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/site/Legal";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/refund-policy")({
-  head: () => seo("Refund Policy", "Placeholder refund policy for consultation bookings made with Varun Advocates."),
+  head: () => seo("Refund Policy", "Placeholder refund policy for consultation bookings made with Vidyacharan Advocates."),
   component: () => (
     <LegalPage title="Refund Policy" updated="October 2026" sections={[
       { h: "Scope", p: "This placeholder policy applies to consultation fees paid through this website." },

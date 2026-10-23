@@ -8,7 +8,7 @@ import { BRANCH, EMAIL, HEAD_OFFICE, PHONE_1, PHONE_2, mapLink } from "@/lib/sit
 import { saveSubmission, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => seo("Contact Us", "Contact Varun Advocates in Bangalore. Find our office address, hours and send us a message."),
+  head: () => seo("Contact Us", "Contact Vidyacharan Advocates in Bangalore. Find our office address, hours and send us a message."),
   component: Contact,
 });
 

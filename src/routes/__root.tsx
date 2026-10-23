@@ -83,9 +83,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Varun Advocates & Legal Consultants, Bangalore" },
-      { name: "description", content: "Varun is a Bangalore law firm offering civil, property, employment, cyber, IP, international and arbitration legal services." },
-      { property: "og:site_name", content: "Varun Advocates" },
+      { title: "Vidyacharan Advocates & Legal Consultants, Bangalore" },
+      { name: "description", content: "Vidyacharan is a Bangalore law firm offering civil, property, employment, cyber, IP, international and arbitration legal services." },
+      { property: "og:site_name", content: "Vidyacharan Advocates" },
       { property: "og:type", content: "website" },
     ],
     links: [

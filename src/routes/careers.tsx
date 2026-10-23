@@ -7,7 +7,7 @@ import { PageHero } from "@/components/site/FadeIn";
 import { saveSubmission, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/careers")({
-  head: () => seo("Careers", "Join Varun Advocates in Bangalore. View current openings for associates, interns and support staff and apply online."),
+  head: () => seo("Careers", "Join Vidyacharan Advocates in Bangalore. View current openings for associates, interns and support staff and apply online."),
   component: Careers,
 });
 

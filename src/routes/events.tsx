@@ -6,7 +6,7 @@ import { ImageSlot } from "@/components/site/ImageSlot";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/events")({
-  head: () => seo("Our Office Events", "Photos from office events, legal awareness camps and celebrations at Varun Advocates, Bangalore."),
+  head: () => seo("Our Office Events", "Photos from office events, legal awareness camps and celebrations at Vidyacharan Advocates, Bangalore."),
   component: Events,
 });
 

@@ -10,7 +10,7 @@ import { saveSubmission, seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/appointment")({
-  head: () => seo("Book an Appointment", "Book a legal consultation with Varun Advocates in Bangalore. Choose your consultation type, date and a 40-minute time slot."),
+  head: () => seo("Book an Appointment", "Book a legal consultation with Vidyacharan Advocates in Bangalore. Choose your consultation type, date and a 40-minute time slot."),
   component: Appointment,
 });
 

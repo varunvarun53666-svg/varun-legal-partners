@@ -5,7 +5,7 @@ import { TEAM } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/associates")({
-  head: () => seo("Our Associates", "Meet the advocates at Varun, Bangalore, and the practice areas each of them leads."),
+  head: () => seo("Our Associates", "Meet the advocates at Vidyacharan, Bangalore, and the practice areas each of them leads."),
   component: () => (
     <>
       <PageHero title="Our Associates" subtitle="The advocates behind every case." />

@@ -4,6 +4,6 @@ import { NEWS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/news/")({
-  head: () => seo("News", "Latest news and updates from Varun Advocates & Legal Consultants, Bangalore."),
+  head: () => seo("News", "Latest news and updates from Vidyacharan Advocates & Legal Consultants, Bangalore."),
   component: () => <PostGrid title="News" posts={NEWS} base="/news" />,
 });

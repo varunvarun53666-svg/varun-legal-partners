@@ -1,11 +1,11 @@
-# Varun Legal Partners
+# Vidyacharan Legal Partners
 
-Build a complete, responsive law firm website for "Varun", a law firm in Bangalore, India. Use React, Tailwind and React Router. Use placeholder gray boxes with a small label for every image (I will upload real photos later) and write original placeholder copy everywhere.
+Build a complete, responsive law firm website for "Vidyacharan", a law firm in Bangalore, India. Use React, Tailwind and React Router. Use placeholder gray boxes with a small label for every image (I will upload real photos later) and write original placeholder copy everywhere.
 
 BRAND
 - Colors: white page background; amber #F6B04C for active menu items, section titles and secondary buttons; deep orange #FF6A00 for the disclaimer heading and primary buttons; navy #1B365D for the footer and headings; soft grey card shadows.
 - Fonts: Playfair Display for headings, Inter for body text.
-- Logo: simple text logo "VARUN" with a small column icon, plus the line "Advocates & Legal Consultants". A header image slot sits on the left.
+- Logo: simple text logo "VIDYACHARAN" with a small column icon, plus the line "Advocates & Legal Consultants". A header image slot sits on the left.
 
 GLOBAL ELEMENTS
 1. Disclaimer gate: on first visit, show a modal over the whole site with an orange "Disclaimer" heading, a scrollable body of numbered points and a fixed orange "I AGREE >" button at the bottom. Write the points yourself: Bar Council of India rules do not permit advertising or solicitation; the site is for information only; no advocate-client relationship is created; nothing here is legal advice; the site uses cookies. The site cannot be used until the button is clicked. Remember the choice in localStorage.

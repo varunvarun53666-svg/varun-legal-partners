@@ -49,7 +49,7 @@ export function Footer() {
           <p className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-amber" />Mon–Sat: 9 AM – 9 PM</p>
         </div>
       </div>
-      <div className="border-t border-navy-foreground/10 py-5 text-center text-xs text-navy-foreground/60">© {new Date().getFullYear()} Varun Advocates &amp; Legal Consultants. All rights reserved.</div>
+      <div className="border-t border-navy-foreground/10 py-5 text-center text-xs text-navy-foreground/60">© {new Date().getFullYear()} Vidyacharan Advocates &amp; Legal Consultants. All rights reserved.</div>
     </footer>
   );
 }

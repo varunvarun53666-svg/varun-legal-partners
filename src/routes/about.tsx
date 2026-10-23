@@ -6,7 +6,7 @@ import { PRACTICE_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => seo("About Us", "Learn about Varun Advocates & Legal Consultants, a Bangalore law firm built on clear advice, careful preparation and client trust."),
+  head: () => seo("About Us", "Learn about Vidyacharan Advocates & Legal Consultants, a Bangalore law firm built on clear advice, careful preparation and client trust."),
   component: About,
 });
 
@@ -18,7 +18,7 @@ function About() {
         <FadeIn>
           <p className="section-title">Who we are</p>
           <h2 className="mt-2 text-3xl md:text-4xl">Practical legal counsel, explained simply</h2>
-          <p className="mt-4 leading-relaxed text-muted-foreground">Founded in Bengaluru, Varun is a team of advocates who believe good legal work starts with listening. We take time to understand your situation, explain your options in plain language and stand with you from the first consultation to the final order.</p>
+          <p className="mt-4 leading-relaxed text-muted-foreground">Founded in Bengaluru, Vidyacharan is a team of advocates who believe good legal work starts with listening. We take time to understand your situation, explain your options in plain language and stand with you from the first consultation to the final order.</p>
           <p className="mt-3 leading-relaxed text-muted-foreground">Our practice spans civil disputes, property, employment, digital, intellectual property, cross-border and arbitration matters for individuals, families and businesses.</p>
           <Link to="/appointment" className="btn-primary mt-6">Book a consultation</Link>
         </FadeIn>
