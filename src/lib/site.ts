@@ -1,8 +1,8 @@
 export const PHONE_1 = "+91 98450 00000";
 export const PHONE_2 = "+91 80 4000 0000";
 export const TEL = "tel:+919845000000";
-export const WHATSAPP = "https://wa.me/919845000000?text=" + encodeURIComponent("Hello Varun, I would like to enquire about a legal matter.");
-export const EMAIL = "contact@varunlegal.in";
+export const WHATSAPP = "https://wa.me/919845000000?text=" + encodeURIComponent("Hello Vidyacharan, I would like to enquire about a legal matter.");
+export const EMAIL = "contact@vidyacharan.in";
 export const HEAD_OFFICE = "No. 12, 2nd Floor, Lavelle Road, Bengaluru, Karnataka 560001";
 export const BRANCH = "45, 80 Feet Road, Koramangala 4th Block, Bengaluru 560034";
 export const mapLink = (a: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a)}`;
@@ -57,7 +57,7 @@ export const MORE_LINKS = [
 ] as const;
 
 export const TEAM = [
-  { name: "Adv. Varun Kumar", role: "Founder & Managing Partner", area: "Civil Law" },
+  { name: "Adv. Vidyacharan", role: "Founder & Managing Partner", area: "Civil Law" },
   { name: "Adv. Meera Rao", role: "Senior Associate", area: "Real Estate & Property" },
   { name: "Adv. Arjun Shetty", role: "Associate", area: "Employment & Labour" },
   { name: "Adv. Kavya Nair", role: "Associate", area: "Cyber & Digital Law" },
@@ -85,7 +85,7 @@ export const BLOG: Post[] = [
   "What To Do After an Online Fraud", "Why Arbitration Clauses Matter", "A Simple Guide to Civil Suits",
 ].map((t, i) => ({ slug: t.toLowerCase().replace(/[^a-z0-9]+/g, "-"), title: t, date: `${10 + i} Aug 2026`, excerpt: `A short, plain-language look at ${t.toLowerCase()}.`, body: body(t) }));
 export const NEWS: Post[] = [
-  "Varun Opens Koramangala Branch", "Team Hosts Free Legal Awareness Camp", "New Associates Join the Firm",
+  "Vidyacharan Opens Koramangala Branch", "Team Hosts Free Legal Awareness Camp", "New Associates Join the Firm",
   "Firm Speaks at Bengaluru Startup Meet",
 ].map((t, i) => ({ slug: t.toLowerCase().replace(/[^a-z0-9]+/g, "-"), title: t, date: `${2 + i * 5} Sep 2026`, excerpt: `Placeholder update: ${t.toLowerCase()}.`, body: body(t) }));
 

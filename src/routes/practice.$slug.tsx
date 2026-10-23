@@ -12,7 +12,7 @@ export const Route = createFileRoute("/practice/$slug")({
     if (!area) throw notFound();
     return area;
   },
-  head: ({ loaderData }) => loaderData ? seo(`${loaderData.name} Lawyers`, `${loaderData.short} ${loaderData.name} advocates at Varun, Bangalore.`) : { meta: [{ title: "Practice area not found" }, { name: "robots", content: "noindex" }] },
+  head: ({ loaderData }) => loaderData ? seo(`${loaderData.name} Lawyers`, `${loaderData.short} ${loaderData.name} advocates at Vidyacharan, Bangalore.`) : { meta: [{ title: "Practice area not found" }, { name: "robots", content: "noindex" }] },
   component: Practice,
 });
 

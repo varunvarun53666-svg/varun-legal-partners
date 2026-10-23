@@ -6,7 +6,7 @@ import { FAQS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/faq")({
-  head: () => seo("FAQ", "Answers to common questions about consultations, fees and working with Varun Advocates in Bangalore."),
+  head: () => seo("FAQ", "Answers to common questions about consultations, fees and working with Vidyacharan Advocates in Bangalore."),
   component: Faq,
 });
 
