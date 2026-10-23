@@ -53,11 +53,11 @@ function Counter({ to, label, suffix = "+" }: { to: number; label: string; suffi
 function Home() {
   const slides = [
     ...PRACTICE_AREAS.map((p) => (
-      <div key={p.slug} className="grid min-h-[480px] items-center gap-8 bg-accent px-16 py-12 md:grid-cols-2">
-        <ImageSlot label={`${p.name} hero image`} className="h-80 rounded-xl" />
-        <div>
+      <div key={p.slug} className="grid min-h-[480px] items-center gap-6 bg-accent px-6 py-10 md:grid-cols-2 md:gap-8 md:px-16 md:py-12">
+        <ImageSlot label={`${p.name} hero image`} className="h-56 rounded-xl md:h-80" />
+        <div className="pb-8 md:pb-0">
           <p className="section-title">Practice Area</p>
-          <h2 className="mt-2 text-4xl">{p.name}</h2>
+          <h2 className="mt-2 text-3xl md:text-4xl">{p.name}</h2>
           <ul className="mt-4 grid grid-cols-2 gap-2 text-sm">{p.services.slice(0, 4).map((s) => <li key={s.title} className="before:mr-2 before:text-primary before:content-['▸']">{s.title}</li>)}</ul>
           <p className="mt-5 flex items-center gap-2 font-semibold text-navy"><Phone className="h-4 w-4 text-primary" /> Call {PHONE_1}</p>
           <Link to="/practice/$slug" params={{ slug: p.slug }} className="btn-primary mt-6">Learn more</Link>
@@ -66,8 +66,8 @@ function Home() {
     )),
     <div key="team" className="relative min-h-[480px]">
       <ImageSlot label="Team group photo" className="absolute inset-0" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-navy/60 text-center">
-        <h2 className="text-5xl text-navy-foreground">Our Team, Your Advocates</h2>
+      <div className="absolute inset-0 flex flex-col items-center justify-center bg-navy/60 px-6 text-center">
+        <h2 className="text-3xl text-navy-foreground md:text-5xl">Our Team, Your Advocates</h2>
         <p className="mt-3 text-navy-foreground/85">Experienced advocates serving Bengaluru with care and clarity.</p>
         <Link to="/appointment" className="btn-primary mt-6">Book a consultation</Link>
       </div>
