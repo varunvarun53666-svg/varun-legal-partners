@@ -53,8 +53,7 @@ function Counter({ to, label, suffix = "+" }: { to: number; label: string; suffi
 function BannerSlide({ name, alt }: { name: string; alt: string }) {
   return (
     <div className="w-full">
-      <ImageSlot label={`${name} banner – desktop`} alt={alt} className="hidden aspect-[1920/700] w-full md:flex" />
-      <ImageSlot label={`${name} banner – mobile`} alt={alt} className="aspect-[1080/1350] w-full md:hidden" />
+      <ImageSlot label={`${name} banner`} alt={alt} className="aspect-[1080/1350] w-full md:aspect-[1920/700]" loading="eager" />
     </div>
   );
 }

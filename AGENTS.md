@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep image subject selection and optimized variants in `src/lib/site-images.ts`, rendered through `ImageSlot`; this replaces images consistently without changing page content or layout.
