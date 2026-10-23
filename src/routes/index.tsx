@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Phone, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ImageSlot } from "@/components/site/ImageSlot";
 import { FadeIn } from "@/components/site/FadeIn";
-import { PHONE_1, PRACTICE_AREAS, TEAM, TESTIMONIALS } from "@/lib/site";
+import { PHONE_1, PRACTICE_AREAS, TESTIMONIALS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -51,7 +51,7 @@ function Counter({ to, label, suffix = "+" }: { to: number; label: string; suffi
 }
 
 function Home() {
-  const desktopSlides = [
+  const slides = [
     ...PRACTICE_AREAS.map((p) => (
       <div key={p.slug} className="grid min-h-[480px] items-center gap-8 bg-accent px-16 py-12 md:grid-cols-2">
         <ImageSlot label={`${p.name} hero image`} className="h-80 rounded-xl" />
@@ -73,20 +73,11 @@ function Home() {
       </div>
     </div>,
   ];
-  const mobileSlides = TEAM.slice(0, 5).map((t) => (
-    <div key={t.name} className="flex flex-col items-center bg-accent px-6 pb-14 pt-8 text-center">
-      <ImageSlot label={`Photo of ${t.name}`} className="h-56 w-48 rounded-xl" />
-      <h2 className="mt-4 text-2xl">{t.name}</h2>
-      <p className="text-sm text-muted-foreground">{t.role}</p>
-      <a href="tel:+919845000000" className="mt-2 flex items-center gap-1 text-sm font-semibold text-primary"><Phone className="h-4 w-4" />{PHONE_1}</a>
-    </div>
-  ));
   const [ti, setTi] = useAuto(TESTIMONIALS.length, 6000);
 
   return (
     <>
-      <Slider slides={desktopSlides} className="hidden md:block" />
-      <Slider slides={mobileSlides} className="md:hidden" />
+      <Slider slides={slides} />
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <FadeIn className="text-center"><p className="section-title">Our Expertise</p><h2 className="mt-2 text-3xl md:text-4xl">What we are expert at</h2></FadeIn>
