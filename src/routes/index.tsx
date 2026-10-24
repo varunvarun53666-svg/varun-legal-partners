@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageSlot } from "@/components/site/ImageSlot";
 import { FadeIn } from "@/components/site/FadeIn";
 import { PRACTICE_AREAS, TEAM, TESTIMONIALS } from "@/lib/site";
@@ -32,22 +32,6 @@ function Slider({ slides, className }: { slides: React.ReactNode[]; className?: 
       </div>
     </div>
   );
-}
-
-function Counter({ to, label, suffix = "+" }: { to: number; label: string; suffix?: string }) {
-  const [v, setV] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const io = new IntersectionObserver(([e]) => {
-      if (!e?.isIntersecting) return; io.disconnect();
-      const start = performance.now();
-      const step = (t: number) => { const p = Math.min(1, (t - start) / 1800); setV(Math.round(to * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(step); };
-      requestAnimationFrame(step);
-    });
-    if (ref.current) io.observe(ref.current);
-    return () => io.disconnect();
-  }, [to]);
-  return <div ref={ref} className="text-center"><div className="font-display text-4xl font-bold text-amber md:text-5xl">{v.toLocaleString("en-IN")}{suffix}</div><div className="mt-2 text-sm text-navy-foreground/80">{label}</div></div>;
 }
 
 function BannerSlide({ name, alt }: { name: string; alt: string }) {
@@ -100,12 +84,6 @@ function Home() {
             <p className="mt-5 leading-relaxed text-navy-foreground/85">Vidyacharan Advocates &amp; Legal Consultants brings together advocates across civil, property, employment, digital and commercial law. We listen first, explain plainly and prepare thoroughly, so you can make informed decisions at every stage.</p>
             <Link to="/about" className="btn-secondary mt-8">About us</Link>
           </FadeIn>
-        </div>
-      </section>
-
-      <section className="bg-navy py-16">
-        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-10 px-4 md:grid-cols-4">
-          <Counter to={2500} label="Cases handled" /><Counter to={15} label="Years of service" /><Counter to={1800} label="Happy clients" /><Counter to={12} label="Advocates" />
         </div>
       </section>
 
