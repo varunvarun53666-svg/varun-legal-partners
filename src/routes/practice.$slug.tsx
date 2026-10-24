@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Briefcase, Building2, FileText, Gavel, Scale, Shield, CheckCircle2 } from "lucide-react";
 import { FadeIn, PageHero } from "@/components/site/FadeIn";
+import { ImageSlot } from "@/components/site/ImageSlot";
 import { PRACTICE_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
