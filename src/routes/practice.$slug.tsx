@@ -21,6 +21,17 @@ function Practice() {
   return (
     <>
       <PageHero title={a.name} label={`${a.name} banner image`} />
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 lg:grid-cols-2">
+        <FadeIn>
+          <h2 className="text-3xl md:text-4xl">{a.name} Services</h2>
+          <ul className="mt-6 space-y-3 text-muted-foreground">
+            {a.highlights.map((h) => <li key={h} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber" />{h}</li>)}
+          </ul>
+        </FadeIn>
+        <FadeIn delay={120}>
+          <ImageSlot label={`${a.name} services image`} className="aspect-[4/3] rounded-xl" />
+        </FadeIn>
+      </section>
       <section className="mx-auto max-w-3xl px-4 pt-16 text-center">
         <p className="section-title">Practice Area</p>
         <h2 className="mt-2 text-3xl md:text-4xl">How we help with {a.name}</h2>
