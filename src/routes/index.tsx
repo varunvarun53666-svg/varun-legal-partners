@@ -103,8 +103,8 @@ function Home() {
       <section className="bg-muted py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center"><p className="section-title">Our Team</p><h2 className="mt-2 text-3xl md:text-4xl">Meet our advocates</h2></div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {TEAM.slice(0, 4).map((t, k) => (
+          <div className="mt-10 mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
+            {TEAM.map((t, k) => (
               <FadeIn key={t.name} delay={k * 80}>
                 <Link to="/associates" className="card-soft block overflow-hidden text-center hover:-translate-y-1">
                   <ImageSlot label={`Photo of ${t.name}`} className="aspect-square" />

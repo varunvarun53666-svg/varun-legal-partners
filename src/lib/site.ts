@@ -168,11 +168,6 @@ export const TEAM = [
   { name: "Adv. Vidyacharan", role: "Founder & Managing Partner", area: "Civil Law" },
   { name: "Adv. Meera Rao", role: "Senior Associate", area: "Real Estate & Property" },
   { name: "Adv. Arjun Shetty", role: "Associate", area: "Employment & Labour" },
-  { name: "Adv. Kavya Nair", role: "Associate", area: "Cyber & Digital Law" },
-  { name: "Adv. Rahul Iyer", role: "Associate", area: "Intellectual Property Law (IP Law)" },
-  { name: "Adv. Sneha Gowda", role: "Associate", area: "Arbitration & Mediation" },
-  { name: "Adv. Farhan Ali", role: "Junior Associate", area: "International Law" },
-  { name: "Adv. Divya Menon", role: "Junior Associate", area: "Civil Law" },
 ];
 
 export const TESTIMONIALS = [
