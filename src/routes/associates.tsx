@@ -9,7 +9,7 @@ export const Route = createFileRoute("/associates")({
   component: () => (
     <>
       <PageHero title="Our Associates" subtitle="The advocates behind every case." />
-      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto grid max-w-5xl gap-6 px-4 py-16 sm:grid-cols-3">
         {TEAM.map((t, k) => (
           <FadeIn key={t.name} delay={k * 60}>
             <div className="card-soft overflow-hidden text-center hover:-translate-y-1">
