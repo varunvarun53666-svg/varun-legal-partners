@@ -26,10 +26,10 @@ const schema = z.object({
 });
 type Form = z.infer<typeof schema>;
 
-/** 40-minute slots from 9:00 AM; last slot starts before 9:00 PM. */
+/** 40-minute slots from 9:00 AM; the last slot ends by 6:00 PM. */
 export function makeSlots() {
   const out: string[] = [];
-  for (let m = 9 * 60; m + 40 <= 21 * 60; m += 40) {
+  for (let m = 9 * 60; m + 40 <= 18 * 60; m += 40) {
     const h = Math.floor(m / 60), mm = m % 60;
     out.push(`${((h + 11) % 12) + 1}:${String(mm).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`);
   }
