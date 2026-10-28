@@ -46,7 +46,7 @@ export function Footer() {
             <p key={t} className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-amber" /><span><strong>{t}:</strong> <span className="text-navy-foreground/80">{addr}</span><br />
               <a className="text-amber underline-offset-2 hover:underline" href={mapLink(addr!)} target="_blank" rel="noreferrer">View on Map</a></span></p>
           ))}
-          <p className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-amber" />Mon–Sat: 9 AM – 9 PM</p>
+          <p className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-amber" />Mon–Sat: 9 AM – 6 PM · Sunday closed</p>
         </div>
       </div>
       <div className="border-t border-navy-foreground/10 py-5 text-center text-xs text-navy-foreground/60">© {new Date().getFullYear()} Vidyacharan Advocates &amp; Legal Consultants. All rights reserved.</div>
