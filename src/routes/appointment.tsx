@@ -77,15 +77,15 @@ function Appointment() {
       <PageHero title="Book an Appointment" subtitle="Two quick steps to schedule your consultation." />
       <section className="mx-auto max-w-3xl px-4 py-12">
         <ol className="mb-10 flex items-center justify-between" aria-label="Progress">
-          {["Your details", "Date & time", "Payment"].map((s, k) => (
-            <li key={s} className="flex flex-1 items-center">
+          {["Your details", "Date & time"].map((s, k) => (
+            <li key={s} className={cn("flex items-center", k === 0 ? "flex-1" : "flex-none")}>
               <div className="flex flex-col items-center gap-1">
                 <span className={cn("flex h-10 w-10 items-center justify-center rounded-full border-2 font-semibold", step > k + 1 ? "border-primary bg-primary text-primary-foreground" : step === k + 1 ? "border-primary text-primary" : "border-border text-muted-foreground")}>
                   {step > k + 1 ? <Check className="h-5 w-5" /> : k + 1}
                 </span>
                 <span className="text-xs">{s}</span>
               </div>
-              {k < 2 && <div className={cn("mx-2 mb-5 h-0.5 flex-1", step > k + 1 ? "bg-primary" : "bg-border")} />}
+              {k === 0 && <div className={cn("mx-2 mb-5 h-0.5 flex-1", step > k + 1 ? "bg-primary" : "bg-border")} />}
             </li>
           ))}
         </ol>
@@ -135,13 +135,13 @@ function Appointment() {
           <div className="card-soft p-6 md:p-8 animate-in fade-in">
             <h3 className="text-2xl">Confirm your slot</h3>
             <dl className="mt-5 divide-y rounded-lg border bg-accent/50">
-              {[["Consultation type", f.type], ["Date", date && format(date, "EEEE, d MMMM yyyy")], ["Time", slot]].map(([k, v]) => (
+              {[["Name", f.name], ["Consultation type", f.type], ["Date", date && format(date, "EEEE, d MMMM yyyy")], ["Time", slot]].map(([k, v]) => (
                 <div key={k} className="flex justify-between px-4 py-3 text-sm"><dt className="text-muted-foreground">{k}</dt><dd className="font-semibold text-navy">{v}</dd></div>
               ))}
             </dl>
             <div className="mt-8 flex flex-wrap justify-between gap-3">
               <button className="btn-outline" onClick={() => setConfirmView(false)}>Back</button>
-              <button className="btn-primary" onClick={() => setStep(3)}>Proceed to Payment</button>
+              <button className="btn-primary" onClick={confirm}>Confirm booking</button>
             </div>
           </div>
         )}
