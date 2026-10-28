@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { format } from "date-fns";
-import { Check, CheckCircle2, CreditCard } from "lucide-react";
+import { Check, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -15,7 +15,6 @@ export const Route = createFileRoute("/appointment")({
 });
 
 const TYPES = [...PRACTICE_AREAS.map((p) => p.name), "Other"];
-const FEE = 1500;
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100),
@@ -58,7 +57,7 @@ function Appointment() {
   };
 
   const confirm = () => {
-    // TODO: connect a payment provider here (e.g. Razorpay/Stripe checkout) before saving the booking.
+    // TODO: connect a backend here to email the lawyer, add the booking to a calendar and send reminders.
     saveSubmission("bookings", { ...f, mobile: `+91${f.mobile}`, date: date && format(date, "yyyy-MM-dd"), slot });
     setDone(true);
   };
@@ -75,7 +74,7 @@ function Appointment() {
   const label = "mb-1 block text-sm font-medium text-navy";
   return (
     <>
-      <PageHero title="Book an Appointment" subtitle="Three quick steps to schedule your consultation." />
+      <PageHero title="Book an Appointment" subtitle="Two quick steps to schedule your consultation." />
       <section className="mx-auto max-w-3xl px-4 py-12">
         <ol className="mb-10 flex items-center justify-between" aria-label="Progress">
           {["Your details", "Date & time", "Payment"].map((s, k) => (
