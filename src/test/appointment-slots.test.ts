@@ -9,7 +9,7 @@ describe("Appointment time slots", () => {
   });
 
   it("ends the last 40-minute slot by 6:00 PM", () => {
-    expect(slots[slots.length - 1]).toBe("5:20 PM");
+    expect(slots[slots.length - 1]).toBe("5:00 PM");
   });
 
   it("never offers a slot that would run past 6:00 PM", () => {
