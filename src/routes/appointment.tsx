@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { format } from "date-fns";
-import { Check, CheckCircle2, CreditCard } from "lucide-react";
+import { Check, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 import { Calendar } from "@/components/ui/calendar";
@@ -15,7 +15,6 @@ export const Route = createFileRoute("/appointment")({
 });
 
 const TYPES = [...PRACTICE_AREAS.map((p) => p.name), "Other"];
-const FEE = 1500;
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100),
@@ -58,7 +57,7 @@ function Appointment() {
   };
 
   const confirm = () => {
-    // TODO: connect a payment provider here (e.g. Razorpay/Stripe checkout) before saving the booking.
+    // TODO: connect a backend here to email the lawyer, add the booking to a calendar and send reminders.
     saveSubmission("bookings", { ...f, mobile: `+91${f.mobile}`, date: date && format(date, "yyyy-MM-dd"), slot });
     setDone(true);
   };
@@ -75,18 +74,18 @@ function Appointment() {
   const label = "mb-1 block text-sm font-medium text-navy";
   return (
     <>
-      <PageHero title="Book an Appointment" subtitle="Three quick steps to schedule your consultation." />
+      <PageHero title="Book an Appointment" subtitle="Two quick steps to schedule your consultation." />
       <section className="mx-auto max-w-3xl px-4 py-12">
         <ol className="mb-10 flex items-center justify-between" aria-label="Progress">
-          {["Your details", "Date & time", "Payment"].map((s, k) => (
-            <li key={s} className="flex flex-1 items-center">
+          {["Your details", "Date & time"].map((s, k) => (
+            <li key={s} className={cn("flex items-center", k === 0 ? "flex-1" : "flex-none")}>
               <div className="flex flex-col items-center gap-1">
                 <span className={cn("flex h-10 w-10 items-center justify-center rounded-full border-2 font-semibold", step > k + 1 ? "border-primary bg-primary text-primary-foreground" : step === k + 1 ? "border-primary text-primary" : "border-border text-muted-foreground")}>
                   {step > k + 1 ? <Check className="h-5 w-5" /> : k + 1}
                 </span>
                 <span className="text-xs">{s}</span>
               </div>
-              {k < 2 && <div className={cn("mx-2 mb-5 h-0.5 flex-1", step > k + 1 ? "bg-primary" : "bg-border")} />}
+              {k === 0 && <div className={cn("mx-2 mb-5 h-0.5 flex-1", step > k + 1 ? "bg-primary" : "bg-border")} />}
             </li>
           ))}
         </ol>
@@ -136,34 +135,17 @@ function Appointment() {
           <div className="card-soft p-6 md:p-8 animate-in fade-in">
             <h3 className="text-2xl">Confirm your slot</h3>
             <dl className="mt-5 divide-y rounded-lg border bg-accent/50">
-              {[["Consultation type", f.type], ["Date", date && format(date, "EEEE, d MMMM yyyy")], ["Time", slot]].map(([k, v]) => (
+              {[["Name", f.name], ["Consultation type", f.type], ["Date", date && format(date, "EEEE, d MMMM yyyy")], ["Time", slot]].map(([k, v]) => (
                 <div key={k} className="flex justify-between px-4 py-3 text-sm"><dt className="text-muted-foreground">{k}</dt><dd className="font-semibold text-navy">{v}</dd></div>
               ))}
             </dl>
             <div className="mt-8 flex flex-wrap justify-between gap-3">
               <button className="btn-outline" onClick={() => setConfirmView(false)}>Back</button>
-              <button className="btn-primary" onClick={() => setStep(3)}>Proceed to Payment</button>
-            </div>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className="card-soft p-6 md:p-8 animate-in fade-in">
-            <h3 className="text-2xl">Payment summary</h3>
-            <dl className="mt-5 divide-y rounded-lg border">
-              {[["Name", f.name], ["Consultation", f.type], ["Date & time", `${date && format(date, "d MMM yyyy")}, ${slot}`], ["Consultation fee", `₹${FEE.toLocaleString("en-IN")}`]].map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-4 px-4 py-3 text-sm"><dt className="text-muted-foreground">{k}</dt><dd className="text-right font-semibold text-navy">{v}</dd></div>
-              ))}
-            </dl>
-            <div className="mt-6 flex items-center gap-3 rounded-lg border-2 border-dashed border-amber bg-accent p-5 text-sm text-muted-foreground">
-              <CreditCard className="h-6 w-6 shrink-0 text-amber" />Payment gateway placeholder — online payment will be connected here.
-            </div>
-            <div className="mt-8 flex flex-wrap justify-between gap-3">
-              <button className="btn-outline" onClick={() => setStep(2)}>Back</button>
               <button className="btn-primary" onClick={confirm}>Confirm booking</button>
             </div>
           </div>
         )}
+
       </section>
     </>
   );
