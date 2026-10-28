@@ -14,10 +14,9 @@ describe("Appointment time slots", () => {
 
   it("never offers a slot that would run past 6:00 PM", () => {
     const toMinutes = (s: string) => {
-      const [time, meridiem] = s.split(" ");
-      const [h, m] = time.split(":").map(Number);
-      const hour = meridiem === "PM" ? (h === 12 ? 12 : h + 12) : h === 12 ? 0 : h;
-      return hour * 60 + m;
+      const time = s.split(" ")[0];
+      const hour = Number(time.split(":")[0]);
+      return (s.endsWith("PM") ? hour + 12 : hour) * 60 + Number(time.split(":")[1]);
     };
     const latestEnd = Math.max(...slots.map((s) => toMinutes(s) + 40));
     expect(latestEnd).toBeLessThanOrEqual(18 * 60);
