@@ -146,23 +146,6 @@ function Appointment() {
           </div>
         )}
 
-        {step === 3 && (
-          <div className="card-soft p-6 md:p-8 animate-in fade-in">
-            <h3 className="text-2xl">Payment summary</h3>
-            <dl className="mt-5 divide-y rounded-lg border">
-              {[["Name", f.name], ["Consultation", f.type], ["Date & time", `${date && format(date, "d MMM yyyy")}, ${slot}`], ["Consultation fee", `₹${FEE.toLocaleString("en-IN")}`]].map(([k, v]) => (
-                <div key={k} className="flex justify-between gap-4 px-4 py-3 text-sm"><dt className="text-muted-foreground">{k}</dt><dd className="text-right font-semibold text-navy">{v}</dd></div>
-              ))}
-            </dl>
-            <div className="mt-6 flex items-center gap-3 rounded-lg border-2 border-dashed border-amber bg-accent p-5 text-sm text-muted-foreground">
-              <CreditCard className="h-6 w-6 shrink-0 text-amber" />Payment gateway placeholder — online payment will be connected here.
-            </div>
-            <div className="mt-8 flex flex-wrap justify-between gap-3">
-              <button className="btn-outline" onClick={() => setStep(2)}>Back</button>
-              <button className="btn-primary" onClick={confirm}>Confirm booking</button>
-            </div>
-          </div>
-        )}
       </section>
     </>
   );
