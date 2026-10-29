@@ -6,7 +6,7 @@ import { BRANCH, EMAIL, HEAD_OFFICE, PHONE_1, PHONE_2, PRACTICE_AREAS, mapLink }
 const quick = [
   ["/about", "About us"], ["/practice/civil-law", "Services"], ["/associates", "Associates"], ["/careers", "Careers"],
   ["/events", "Our Office Events"], ["/contact", "Contact us"], ["/faq", "FAQ"], ["/blog", "Blog"], ["/news", "News"],
-  ["/privacy-policy", "Privacy Policy"], ["/terms", "Terms & Conditions"], ["/refund-policy", "Refund Policy"],
+  ["/privacy-policy", "Privacy Policy"], ["/terms", "Terms & Conditions"],
 ];
 
 export function Footer() {
