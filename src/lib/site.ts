@@ -161,7 +161,6 @@ export const MORE_LINKS = [
   { to: "/careers", label: "Careers" },
   { to: "/privacy-policy", label: "Privacy Policy" },
   { to: "/terms", label: "Terms & Conditions" },
-  { to: "/refund-policy", label: "Refund Policy" },
 ] as const;
 
 export const TEAM = [

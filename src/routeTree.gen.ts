@@ -18,7 +18,6 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
-import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -71,11 +70,6 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RefundPolicyRoute = RefundPolicyRouteImport.update({
-  id: '/refund-policy',
-  path: '/refund-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -117,7 +111,6 @@ export interface FileRoutesByFullPath {
   '/events': typeof EventsRoute
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -135,7 +128,6 @@ export interface FileRoutesByTo {
   '/events': typeof EventsRoute
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -154,7 +146,6 @@ export interface FileRoutesById {
   '/events': typeof EventsRoute
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
-  '/refund-policy': typeof RefundPolicyRoute
   '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -174,7 +165,6 @@ export interface FileRouteTypes {
     | '/events'
     | '/faq'
     | '/privacy-policy'
-    | '/refund-policy'
     | '/terms'
     | '/blog/$slug'
     | '/news/$slug'
@@ -192,7 +182,6 @@ export interface FileRouteTypes {
     | '/events'
     | '/faq'
     | '/privacy-policy'
-    | '/refund-policy'
     | '/terms'
     | '/blog/$slug'
     | '/news/$slug'
@@ -210,7 +199,6 @@ export interface FileRouteTypes {
     | '/events'
     | '/faq'
     | '/privacy-policy'
-    | '/refund-policy'
     | '/terms'
     | '/blog/$slug'
     | '/news/$slug'
@@ -229,7 +217,6 @@ export interface RootRouteChildren {
   EventsRoute: typeof EventsRoute
   FaqRoute: typeof FaqRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
-  RefundPolicyRoute: typeof RefundPolicyRoute
   TermsRoute: typeof TermsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   NewsSlugRoute: typeof NewsSlugRoute
@@ -303,13 +290,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/refund-policy': {
-      id: '/refund-policy'
-      path: '/refund-policy'
-      fullPath: '/refund-policy'
-      preLoaderRoute: typeof RefundPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -365,7 +345,6 @@ const rootRouteChildren: RootRouteChildren = {
   EventsRoute: EventsRoute,
   FaqRoute: FaqRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
-  RefundPolicyRoute: RefundPolicyRoute,
   TermsRoute: TermsRoute,
   BlogSlugRoute: BlogSlugRoute,
   NewsSlugRoute: NewsSlugRoute,
