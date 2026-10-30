@@ -13,7 +13,7 @@ const POINTS = [
 
 export function DisclaimerGate() {
   const [open, setOpen] = useState(false);
-  useEffect(() => { if (localStorage.getItem(KEY) !== "yes") setOpen(true); }, []);
+  useEffect(() => { if (sessionStorage.getItem(KEY) !== "yes") setOpen(true); }, []);
   useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; }, [open]);
   if (!open) return null;
   return (
