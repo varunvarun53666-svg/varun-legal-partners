@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Briefcase, Building2, FileText, Gavel, Scale, Shield, CheckCircle2 } from "lucide-react";
 import { FadeIn, PageHero } from "@/components/site/FadeIn";
 import { ImageSlot } from "@/components/site/ImageSlot";
-import { PRACTICE_AREAS } from "@/lib/site";
+import { FIRM_NAME, PRACTICE_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 const ICONS = [Scale, FileText, Gavel, Shield, Building2, Briefcase];
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/practice/$slug")({
     if (!area) throw notFound();
     return area;
   },
-  head: ({ loaderData }) => loaderData ? seo(`${loaderData.name} Lawyers`, `${loaderData.short} ${loaderData.name} advocates at Vidyacharan, Bangalore.`) : { meta: [{ title: "Practice area not found" }, { name: "robots", content: "noindex" }] },
+  head: ({ loaderData }) => loaderData ? seo(`${loaderData.name} Lawyers`, `${loaderData.short} ${loaderData.name} advocates at ${FIRM_NAME}, Bangalore.`) : { meta: [{ title: "Practice area not found" }, { name: "robots", content: "noindex" }] },
   component: Practice,
 });
 
@@ -53,7 +53,7 @@ function Practice() {
           );
         })}
       </section>
-      <div className="pb-20 text-center"><Link to="/appointment" className="btn-primary">Book a consultation</Link></div>
+      <div className="pb-20 text-center"><Link to="/appointment" className="btn-primary">Request a consultation</Link></div>
     </>
   );
 }

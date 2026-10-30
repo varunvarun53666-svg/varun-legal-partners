@@ -1,11 +1,16 @@
-export const PHONE_1 = "+91 98450 00000";
-export const PHONE_2 = "+91 80 4000 0000";
-export const TEL = "tel:+919845000000";
-export const WHATSAPP = "https://wa.me/919845000000?text=" + encodeURIComponent("Hello Vidyacharan, I would like to enquire about a legal matter.");
-export const EMAIL = "contact@vidyacharan.in";
-export const HEAD_OFFICE = "No. 12, 2nd Floor, Lavelle Road, Bengaluru, Karnataka 560001";
-export const BRANCH = "45, 80 Feet Road, Koramangala 4th Block, Bengaluru 560034";
-export const mapLink = (a: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a)}`;
+export const FIRM_NAME = "Vidyacharan & Associates";
+export const PHONE_1 = "+91 86182 79621";
+export const PHONE_2 = "+91 94489 33426";
+export const TEL = "tel:+918618279621";
+export const TEL_2 = "tel:+919448933426";
+export const WHATSAPP = "https://wa.me/919740444322?text=" + encodeURIComponent(`Hello ${FIRM_NAME}, I would like to enquire about a legal matter.`);
+export const EMAIL = "connect@vidyacharanandassociates.com";
+export const HEAD_OFFICE = "#175/1, 3rd Floor, Ananthapura Main Road, Yelahanka New Town, Bengaluru, Karnataka 560064";
+export const OFFICE_LANDMARK = "Near MedPlus Medicals / Singanayakahalli Post Office";
+export const MAP_LINK = "https://www.google.com/maps/search/?api=1&query=Pinnacle+Advisors+and+Associates+Ananthapura+Main+Road+Yelahanka+Bengaluru";
+export const OFFICE_HOURS_SHORT = "Mon–Sat: 10 AM – 6 PM · Sunday closed";
+export const OFFICE_HOURS = "Monday – Saturday: 10:00 AM – 6:00 PM";
+export const CONSULTATION_METHODS = ["In person at our office", "Video call (Google Meet or other)"] as const;
 
 export type PracticeArea = {
   slug: string; name: string; short: string; intro: string;
@@ -187,12 +192,12 @@ export const BLOG: Post[] = [
   "What To Do After an Online Fraud", "Why Arbitration Clauses Matter", "A Simple Guide to Civil Suits",
 ].map((t, i) => ({ slug: t.toLowerCase().replace(/[^a-z0-9]+/g, "-"), title: t, date: `${10 + i} Aug 2026`, excerpt: `A short, plain-language look at ${t.toLowerCase()}.`, body: body(t) }));
 export const NEWS: Post[] = [
-  "Vidyacharan Opens Koramangala Branch", "Team Hosts Free Legal Awareness Camp", "New Associates Join the Firm",
+  "Legal Awareness: Know Your Rights as a Property Buyer", "Team Hosts Free Legal Awareness Camp", "New Associates Join the Firm",
   "Firm Speaks at Bengaluru Startup Meet",
 ].map((t, i) => ({ slug: t.toLowerCase().replace(/[^a-z0-9]+/g, "-"), title: t, date: `${2 + i * 5} Sep 2026`, excerpt: `Placeholder update: ${t.toLowerCase()}.`, body: body(t) }));
 
 export const FAQS = [
-  ["How do I book a consultation?", "Use the Appointment page to pick a consultation type, date and time slot. You will see a summary before confirming."],
+  ["How do I request a consultation?", "Use the Appointment page to choose a consultation type, method and preferred start time. Review and submit your request; our office will contact you to confirm the exact timing."],
   ["What should I bring to my first meeting?", "Bring any documents related to your matter, such as agreements, notices, title papers or correspondence, along with a photo ID."],
   ["Do you offer online consultations?", "Yes. Consultations can be held in person at our office or over a video call, depending on your preference."],
   ["How are fees decided?", "Fees depend on the nature and complexity of the matter. We discuss them openly before any work begins."],

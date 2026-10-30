@@ -3,12 +3,12 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ImageSlot } from "@/components/site/ImageSlot";
 import { FadeIn } from "@/components/site/FadeIn";
-import { PRACTICE_AREAS, TEAM, TESTIMONIALS } from "@/lib/site";
+import { FIRM_NAME, PRACTICE_AREAS, TEAM, TESTIMONIALS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
-  head: () => seo("Law Firm in Bangalore", "Vidyacharan Advocates & Legal Consultants: trusted Bangalore advocates for civil, property, employment, cyber, IP, international law and arbitration."),
+  head: () => seo("Law Firm in Bangalore", `${FIRM_NAME}: trusted Bangalore advocates for civil, property, employment, cyber, IP, international law and arbitration.`),
   component: Home,
 });
 
@@ -79,9 +79,9 @@ function Home() {
         <ImageSlot label="About section background image" className="absolute inset-0" />
         <div className="relative bg-navy/80 px-4 py-20">
           <FadeIn className="mx-auto max-w-3xl text-center">
-            <p className="section-title">About Vidyacharan</p>
+            <p className="section-title">About {FIRM_NAME}</p>
             <h2 className="mt-2 text-3xl text-navy-foreground md:text-4xl">Rooted in Bengaluru, focused on you</h2>
-            <p className="mt-5 leading-relaxed text-navy-foreground/85">Vidyacharan Advocates &amp; Legal Consultants brings together advocates across civil, property, employment, digital and commercial law. We listen first, explain plainly and prepare thoroughly, so you can make informed decisions at every stage.</p>
+            <p className="mt-5 leading-relaxed text-navy-foreground/85">{FIRM_NAME} brings together advocates across civil, property, employment, digital and commercial law. We listen first, explain plainly and prepare thoroughly, so you can make informed decisions at every stage.</p>
             <Link to="/about" className="btn-secondary mt-8">About us</Link>
           </FadeIn>
         </div>

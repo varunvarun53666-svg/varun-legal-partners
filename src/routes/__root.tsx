@@ -1,3 +1,4 @@
+import { FIRM_NAME } from "@/lib/site";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -83,9 +84,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Vidyacharan Advocates & Legal Consultants, Bangalore" },
-      { name: "description", content: "Vidyacharan is a Bangalore law firm offering civil, property, employment, cyber, IP, international and arbitration legal services." },
-      { property: "og:site_name", content: "Vidyacharan Advocates" },
+      { title: `${FIRM_NAME}` },
+      { name: "description", content: `${FIRM_NAME} is a Bangalore law firm offering civil, property, employment, cyber, IP, international and arbitration legal services.` },
+      { property: "og:site_name", content: `${FIRM_NAME}` },
       { property: "og:type", content: "website" },
     ],
     links: [

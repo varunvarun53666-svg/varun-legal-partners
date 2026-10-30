@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Clock, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
-import { BRANCH, EMAIL, HEAD_OFFICE, PHONE_1, PHONE_2, PRACTICE_AREAS, mapLink } from "@/lib/site";
+import { FIRM_NAME, EMAIL, HEAD_OFFICE, OFFICE_LANDMARK, MAP_LINK, OFFICE_HOURS_SHORT, PHONE_1, PHONE_2, TEL, TEL_2, PRACTICE_AREAS } from "@/lib/site";
 
 const quick = [
   ["/about", "About us"], ["/practice/civil-law", "Services"], ["/associates", "Associates"], ["/careers", "Careers"],
@@ -40,16 +40,15 @@ export function Footer() {
         </div>
         <div className="space-y-3">
           <h3 className={h}>Contact</h3>
-          <p className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-amber" /><span><a className={a} href="tel:+919845000000">{PHONE_1}</a><br /><a className={a} href="tel:+918040000000">{PHONE_2}</a></span></p>
-          <p className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-amber" /><a className={a} href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
-          {[["Head Office", HEAD_OFFICE], ["Branch", BRANCH]].map(([t, addr]) => (
-            <p key={t} className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-amber" /><span><strong>{t}:</strong> <span className="text-navy-foreground/80">{addr}</span><br />
-              <a className="text-amber underline-offset-2 hover:underline" href={mapLink(addr!)} target="_blank" rel="noreferrer">View on Map</a></span></p>
-          ))}
-          <p className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-amber" />Mon–Sat: 9 AM – 6 PM · Sunday closed</p>
+          <p className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-amber" /><span><a className={a} href={TEL}>{PHONE_1}</a><br /><a className={a} href={TEL_2}>{PHONE_2}</a></span></p>
+          <p className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-amber" /><a className={`${a} break-all`} href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+          <p className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-amber" /><span><strong>Office:</strong> <span className="text-navy-foreground/80">{HEAD_OFFICE}</span><br />
+            <span className="text-xs text-navy-foreground/80">{OFFICE_LANDMARK}</span><br />
+            <a className="text-amber underline-offset-2 hover:underline" href={MAP_LINK} target="_blank" rel="noreferrer">View on Map</a></span></p>
+          <p className="flex gap-2"><Clock className="h-4 w-4 shrink-0 text-amber" />{OFFICE_HOURS_SHORT}</p>
         </div>
       </div>
-      <div className="border-t border-navy-foreground/10 py-5 text-center text-xs text-navy-foreground/60">© {new Date().getFullYear()} Vidyacharan Advocates &amp; Legal Consultants. All rights reserved.</div>
+      <div className="border-t border-navy-foreground/10 py-5 text-center text-xs text-navy-foreground/60">© {new Date().getFullYear()} {FIRM_NAME}. All rights reserved.</div>
     </footer>
   );
 }
