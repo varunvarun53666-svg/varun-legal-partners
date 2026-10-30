@@ -24,7 +24,7 @@ export function DisclaimerGate() {
           {POINTS.map((p) => <li key={p}>{p}</li>)}
         </ol>
         <div className="border-t p-4">
-          <button className="btn-primary w-full" onClick={() => { localStorage.setItem(KEY, "yes"); setOpen(false); }}>I AGREE &gt;</button>
+          <button className="btn-primary w-full" onClick={() => { sessionStorage.setItem(KEY, "yes"); setOpen(false); }}>I AGREE {'>'}</button>
         </div>
       </div>
     </div>
