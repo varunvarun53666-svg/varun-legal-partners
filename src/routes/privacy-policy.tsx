@@ -1,9 +1,10 @@
+import { FIRM_NAME } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/Legal";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacy-policy")({
-  head: () => seo("Privacy Policy", "How Vidyacharan Advocates collects, uses and protects personal information shared through this website."),
+  head: () => seo("Privacy Policy", `How ${FIRM_NAME} collects, uses and protects personal information shared through this website.`),
   component: () => (
     <LegalPage title="Privacy Policy" updated="October 2026" sections={[
       { h: "Information we collect", p: "We collect only the information you choose to share with us.", items: ["Name, phone number and email address", "Details you provide in appointment or contact forms", "Basic usage data collected through cookies"] },

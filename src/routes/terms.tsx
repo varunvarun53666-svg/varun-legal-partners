@@ -1,15 +1,16 @@
+import { FIRM_NAME } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/Legal";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/terms")({
-  head: () => seo("Terms & Conditions", "The terms that apply to your use of the Vidyacharan Advocates website."),
+  head: () => seo("Terms & Conditions", `The terms that apply to your use of the ${FIRM_NAME} website.`),
   component: () => (
     <LegalPage title="Terms & Conditions" updated="October 2026" sections={[
       { h: "Acceptance", p: "By using this website you agree to these terms and to the disclaimer shown on your first visit." },
       { h: "Information only", p: "All content is general information and not legal advice.", items: ["No advocate-client relationship is created by using this site", "Do not act on any content without professional advice"] },
-      { h: "Bookings", p: "Appointment requests are subject to confirmation by our office.", items: ["We may reschedule if an advocate is unavailable", "Please arrive on time for in-person consultations"] },
-      { h: "Intellectual property", p: "Text, logos and design on this site belong to Vidyacharan Advocates and may not be reused without permission." },
+      { h: "Bookings", p: "Appointment requests are subject to confirmation by our office.", items: ["We may reschedule if an advocate is unavailable", "Please arrive on time for in-person consultations", "Submitting a request does not reserve a time; we will contact you to confirm.", "Video consultation links are shared by email or WhatsApp after confirmation."] },
+      { h: "Intellectual property", p: `Text, logos and design on this site belong to ${FIRM_NAME} and may not be reused without permission.` },
       { h: "Governing law", p: "These terms are governed by the laws of India, with courts in Bengaluru having exclusive jurisdiction." },
     ]} />
   ),

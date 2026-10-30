@@ -1,3 +1,4 @@
+import { FIRM_NAME } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { Briefcase, MapPin } from "lucide-react";
 import { useState } from "react";
@@ -7,7 +8,7 @@ import { PageHero } from "@/components/site/FadeIn";
 import { saveSubmission, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/careers")({
-  head: () => seo("Careers", "Join Vidyacharan Advocates in Bangalore. View current openings for associates, interns and support staff and apply online."),
+  head: () => seo("Careers", `Join ${FIRM_NAME} in Bangalore. View current openings for associates, interns and support staff and apply online.`),
   component: Careers,
 });
 

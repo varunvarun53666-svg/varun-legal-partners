@@ -110,7 +110,7 @@ export function Header() {
               );
             })}
             {mLink("/contact", "Contact us")}
-            <Link to="/appointment" onClick={close} className="btn-primary my-5">Book a consultation</Link>
+            <Link to="/appointment" onClick={close} className="btn-primary my-5">Request a consultation</Link>
           </nav>
         </div>
       )}

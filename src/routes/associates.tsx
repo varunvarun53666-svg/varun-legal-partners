@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FadeIn, PageHero } from "@/components/site/FadeIn";
 import { ImageSlot } from "@/components/site/ImageSlot";
-import { TEAM } from "@/lib/site";
+import { FIRM_NAME, TEAM } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/associates")({
-  head: () => seo("Our Associates", "Meet the advocates at Vidyacharan, Bangalore, and the practice areas each of them leads."),
+  head: () => seo("Our Associates", `Meet the advocates at ${FIRM_NAME}, Bangalore, and the practice areas each of them leads.`),
   component: () => (
     <>
       <PageHero title="Our Associates" subtitle="The advocates behind every case." />

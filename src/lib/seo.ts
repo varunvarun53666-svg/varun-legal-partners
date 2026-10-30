@@ -1,3 +1,4 @@
+import { FIRM_NAME } from "@/lib/site";
 export const seo = (title: string, description: string, type = "website") => ({
   meta: [
     { title: `${title} | Vidyacharan Advocates, Bangalore` },

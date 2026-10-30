@@ -1,3 +1,4 @@
+import { FIRM_NAME } from "@/lib/site";
 import { createFileRoute } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -6,7 +7,7 @@ import { ImageSlot } from "@/components/site/ImageSlot";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/events")({
-  head: () => seo("Our Office Events", "Photos from office events, legal awareness camps and celebrations at Vidyacharan Advocates, Bangalore."),
+  head: () => seo("Our Office Events", `Photos from office events, legal awareness camps and celebrations at ${FIRM_NAME}.`),
   component: Events,
 });
 

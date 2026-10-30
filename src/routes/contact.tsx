@@ -4,11 +4,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { PageHero } from "@/components/site/FadeIn";
-import { BRANCH, EMAIL, HEAD_OFFICE, PHONE_1, PHONE_2, mapLink } from "@/lib/site";
+import { FIRM_NAME, EMAIL, HEAD_OFFICE, OFFICE_LANDMARK, MAP_LINK, OFFICE_HOURS, PHONE_1, PHONE_2, TEL, TEL_2 } from "@/lib/site";
 import { saveSubmission, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => seo("Contact Us", "Contact Vidyacharan Advocates in Bangalore. Find our office address, hours and send us a message."),
+  head: () => seo("Contact Us", `Contact ${FIRM_NAME} in Bangalore. Find our office address, hours and send us a message.`),
   component: Contact,
 });
 
@@ -43,11 +43,9 @@ function Contact() {
         <div className="space-y-6">
           <p className="section-title">Get in touch</p>
           <h2 className="text-3xl">Visit or call our office</h2>
-          {[["Head Office", HEAD_OFFICE], ["Branch", BRANCH]].map(([t, a]) => (
-            <div key={t} className="card-soft flex gap-4 p-5"><MapPin className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">{t}</h3><p className="text-sm text-muted-foreground">{a}</p><a href={mapLink(a!)} target="_blank" rel="noreferrer" className="text-sm font-semibold text-amber hover:underline">View on Map</a></div></div>
-          ))}
-          <div className="card-soft flex gap-4 p-5"><Clock className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">Office hours</h3><p className="text-sm text-muted-foreground">Monday – Saturday: 9:00 AM – 6:00 PM<br />Sunday: Closed</p></div></div>
-          <div className="card-soft flex gap-4 p-5"><Phone className="h-6 w-6 shrink-0 text-primary" /><div className="text-sm"><a href="tel:+919845000000" className="block hover:text-primary">{PHONE_1}</a><a href="tel:+918040000000" className="block hover:text-primary">{PHONE_2}</a><a href={`mailto:${EMAIL}`} className="mt-1 flex items-center gap-1 hover:text-primary"><Mail className="h-4 w-4" />{EMAIL}</a></div></div>
+          <div className="card-soft flex gap-4 p-5"><MapPin className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">Office</h3><p className="text-sm text-muted-foreground">{HEAD_OFFICE}</p><p className="mt-1 text-xs text-muted-foreground">{OFFICE_LANDMARK}</p><a href={MAP_LINK} target="_blank" rel="noreferrer" className="text-sm font-semibold text-amber hover:underline">View on Map</a></div></div>
+          <div className="card-soft flex gap-4 p-5"><Clock className="h-6 w-6 shrink-0 text-primary" /><div><h3 className="text-lg">Office hours</h3><p className="text-sm text-muted-foreground">{OFFICE_HOURS}<br />Sunday: Closed</p></div></div>
+          <div className="card-soft flex gap-4 p-5"><Phone className="h-6 w-6 shrink-0 text-primary" /><div className="text-sm"><a href={TEL} className="block hover:text-primary">{PHONE_1}</a><a href={TEL_2} className="block hover:text-primary">{PHONE_2}</a><a href={`mailto:${EMAIL}`} className="mt-1 flex items-center gap-1 break-all hover:text-primary"><Mail className="h-4 w-4" />{EMAIL}</a></div></div>
         </div>
         <form onSubmit={submit} noValidate className="card-soft space-y-5 p-6 md:p-8">
           <h2 className="text-2xl">Send us a message</h2>
