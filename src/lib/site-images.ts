@@ -41,7 +41,7 @@ const images = {
 export function imageForLabel(label: string) {
   const text = label.toLowerCase();
   if (/corporate|companies act|sebi|gst|income tax|llp/.test(text)) return images.corporate;
-  if (/property|real estate|land law|koramangala|branch/.test(text)) return images.property;
+  if (/property|real estate|land law|koramangala/.test(text)) return images.property;
   if (/employment|labour|rights when employment/.test(text)) return images.employment;
   if (/cyber|digital|online fraud/.test(text)) return images.cyber;
   if (/\bip\b|intellectual|trademark|brand|startup/.test(text)) return images.ip;
