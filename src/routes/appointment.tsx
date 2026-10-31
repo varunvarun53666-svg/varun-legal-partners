@@ -22,7 +22,7 @@ export const appointmentSchema = z.object({
   email: z.string().trim().email("Enter a valid email").max(255).or(z.literal("")),
   address: z.string().max(300),
   type: z.string().min(1, "Choose a consultation type"),
-  method: z.enum(CONSULTATION_METHODS, { error: "Choose a consultation method" }),
+  method: z.enum([...CONSULTATION_METHODS], { message: "Choose a consultation method" }),
   notes: z.string().max(1000),
 });
 type Form = Omit<z.infer<typeof appointmentSchema>, "method"> & { method: string };
