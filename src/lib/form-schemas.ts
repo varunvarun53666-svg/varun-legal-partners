@@ -51,4 +51,5 @@ export function validateCv(file: { name: string; size: number; type: string } | 
     docx: ["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
   };
   if (!ext || !types[ext] || (file.type && !types[ext]?.includes(file.type))) return "Please upload a PDF, DOC or DOCX file only";
+  return undefined;
 }
