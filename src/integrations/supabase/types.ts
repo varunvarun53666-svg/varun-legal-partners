@@ -14,7 +14,117 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointment_requests: {
+        Row: {
+          address: string | null
+          consultation_method: string
+          consultation_type: string
+          created_at: string
+          email: string | null
+          id: string
+          mobile: string
+          name: string
+          notes: string | null
+          preferred_date: string
+          preferred_time: string
+          status: string
+        }
+        Insert: {
+          address?: string | null
+          consultation_method: string
+          consultation_type: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          mobile: string
+          name: string
+          notes?: string | null
+          preferred_date: string
+          preferred_time: string
+          status?: string
+        }
+        Update: {
+          address?: string | null
+          consultation_method?: string
+          consultation_type?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          mobile?: string
+          name?: string
+          notes?: string | null
+          preferred_date?: string
+          preferred_time?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      career_applications: {
+        Row: {
+          created_at: string
+          cv_file_path: string | null
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string
+          position: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          cv_file_path?: string | null
+          email: string
+          id?: string
+          message?: string
+          name: string
+          phone: string
+          position: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          cv_file_path?: string | null
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          position?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
