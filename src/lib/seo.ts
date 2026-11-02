@@ -10,10 +10,3 @@ export const seo = (title: string, description: string, type = "website") => ({
   ],
 });
 
-/** Stores form submissions locally until a database is connected. */
-export function saveSubmission(kind: string, data: unknown) {
-  const key = `vidyacharan_${kind}`;
-  const list = JSON.parse(localStorage.getItem(key) || "[]");
-  list.push({ ...(data as object), created_at: new Date().toISOString() });
-  localStorage.setItem(key, JSON.stringify(list));
-}
