@@ -11,3 +11,5 @@
 
 - Keep image subject selection and optimized variants in `src/lib/site-images.ts`, rendered through `ImageSlot`; this replaces images consistently without changing page content or layout.
 - Keep public identity, contact links, office information and consultation method options in `src/lib/site.ts` and reuse them across pages so updates remain consistent; internal storage namespaces are independent of public naming.
+
+- Keep form schemas in `src/lib/form-schemas.ts` and public insert-only RPCs in `src/lib/submissions.functions.ts`; validate before server-only privileged writes, with no website access policies on submissions or private CVs.

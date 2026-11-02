@@ -2,38 +2,46 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
+import { Button } from "@/components/ui/button";
+import { SpamTrap } from "@/components/site/SpamTrap";
+import { contactSchema as schema, SAVE_ERROR } from "@/lib/form-schemas";
+import { submitContact } from "@/lib/submissions.functions";
 import { PageHero } from "@/components/site/FadeIn";
 import { FIRM_NAME, EMAIL, HEAD_OFFICE, OFFICE_LANDMARK, MAP_LINK, OFFICE_HOURS, PHONE_1, PHONE_2, TEL, TEL_2 } from "@/lib/site";
-import { saveSubmission, seo } from "@/lib/seo";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
   head: () => seo("Contact Us", `Contact ${FIRM_NAME} in Bangalore. Find our office address, hours and send us a message.`),
   component: Contact,
 });
 
-const schema = z.object({
-  name: z.string().trim().min(2, "Please enter your name").max(100),
-  email: z.string().trim().email("Enter a valid email").max(255),
-  phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
-  message: z.string().trim().min(5, "Please write a short message").max(1000),
-});
-
 function Contact() {
+  const save = useServerFn(submitContact);
+  const [trap, setTrap] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const empty = { name: "", email: "", phone: "", message: "" };
   const [f, setF] = useState(empty);
   const [err, setErr] = useState<Record<string, string>>({});
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (saving) return;
     const r = schema.safeParse(f);
     if (!r.success) { setErr(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message]))); return; }
-    saveSubmission("messages", r.data); setErr({}); setF(empty);
-    toast.success("Message sent. We'll get back to you soon.");
+    setSaving(true); setSaveError(""); setErr({});
+    try {
+      const result = await save({ data: { ...r.data, trap } });
+      if (!result.ok) { setSaveError(result.error || SAVE_ERROR); return; }
+      setF(empty); setTrap("");
+      toast.success("Message sent. We'll get back to you soon.");
+    } catch { setSaveError(SAVE_ERROR); }
+    finally { setSaving(false); }
   };
   const fld = (k: keyof typeof f, label: string, type = "text") => (
     <div><label htmlFor={k} className="mb-1 block text-sm font-medium text-navy">{label} *</label>
       {k === "message" ? <textarea id={k} rows={5} className="field" value={f[k]} onChange={(e) => setF({ ...f, [k]: e.target.value })} maxLength={1000} />
-        : <input id={k} type={type} className="field" value={f[k]} onChange={(e) => setF({ ...f, [k]: k === "phone" ? e.target.value.replace(/\D/g, "").slice(0, 10) : e.target.value })} />}
+        : <input maxLength={k === "name" ? 100 : k === "email" ? 255 : 10} id={k} type={type} className="field" value={f[k]} onChange={(e) => setF({ ...f, [k]: k === "phone" ? e.target.value.replace(/\D/g, "").slice(0, 10) : e.target.value })} />}
       {err[k] && <p className="mt-1 text-xs text-destructive">{err[k]}</p>}</div>
   );
   return (
@@ -49,8 +57,10 @@ function Contact() {
         </div>
         <form onSubmit={submit} noValidate className="card-soft space-y-5 p-6 md:p-8">
           <h2 className="text-2xl">Send us a message</h2>
+          <SpamTrap value={trap} onChange={setTrap} />
           {fld("name", "Name")}{fld("email", "Email", "email")}{fld("phone", "Phone (10 digits)", "tel")}{fld("message", "Message")}
-          <button className="btn-primary w-full">Send Message</button>
+          {saveError && <p role="alert" className="text-sm text-destructive">{saveError}</p>}
+          <Button className="btn-primary w-full" disabled={saving} aria-busy={saving}>Send Message</Button>
         </form>
       </section>
     </>

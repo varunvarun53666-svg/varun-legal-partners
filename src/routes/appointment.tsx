@@ -2,11 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { Check, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
-import { z } from "zod";
+import type { z } from "zod";
+import { useServerFn } from "@tanstack/react-start";
+import { Button } from "@/components/ui/button";
+import { SpamTrap } from "@/components/site/SpamTrap";
+import { appointmentSchema, makeSlots, SAVE_ERROR } from "@/lib/form-schemas";
+import { submitAppointment } from "@/lib/submissions.functions";
+export { appointmentSchema, makeSlots } from "@/lib/form-schemas";
 import { Calendar } from "@/components/ui/calendar";
 import { PageHero } from "@/components/site/FadeIn";
 import { CONSULTATION_METHODS, FIRM_NAME, PRACTICE_AREAS } from "@/lib/site";
-import { saveSubmission, seo } from "@/lib/seo";
+import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/appointment")({
@@ -16,29 +22,15 @@ export const Route = createFileRoute("/appointment")({
 
 const TYPES = [...PRACTICE_AREAS.map((p) => p.name), "Other"];
 
-export const appointmentSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name").max(100),
-  mobile: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit mobile number"),
-  email: z.string().trim().email("Enter a valid email").max(255).or(z.literal("")),
-  address: z.string().max(300),
-  type: z.string().min(1, "Choose a consultation type"),
-  method: z.enum([...CONSULTATION_METHODS], { message: "Choose a consultation method" }),
-  notes: z.string().max(1000),
-});
 type Form = Omit<z.infer<typeof appointmentSchema>, "method"> & { method: string };
 
-/** Preferred starts every 40 minutes from 10:00 AM, ending by 6:00 PM. */
-export function makeSlots() {
-  const out: string[] = [];
-  for (let m = 10 * 60; m + 40 <= 18 * 60; m += 40) {
-    const h = Math.floor(m / 60), mm = m % 60;
-    out.push(`${((h + 11) % 12) + 1}:${String(mm).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`);
-  }
-  return out;
-}
 const SLOTS = makeSlots();
 
 function Appointment() {
+  const save = useServerFn(submitAppointment);
+  const [trap, setTrap] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [step, setStep] = useState(1);
   const [f, setF] = useState<Form>({ name: "", mobile: "", email: "", address: "", type: "", method: "", notes: "" });
   const [err, setErr] = useState<Record<string, string>>({});
@@ -57,10 +49,15 @@ function Appointment() {
     setErr({}); setStep(2); window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const confirm = () => {
-    // TODO: connect a backend here to email the lawyer, add the booking to a calendar and send reminders.
-    saveSubmission("bookings", { ...f, mobile: `+91${f.mobile}`, date: date && format(date, "yyyy-MM-dd"), slot });
-    setDone(true);
+  const confirm = async () => {
+    if (saving || !date || !slot) return;
+    setSaving(true); setSaveError("");
+    try {
+      const result = await save({ data: { ...f, trap, preferred_date: format(date, "yyyy-MM-dd"), preferred_time: slot } });
+      if (result.ok) setDone(true);
+      else setSaveError(result.error || SAVE_ERROR);
+    } catch { setSaveError(SAVE_ERROR); }
+    finally { setSaving(false); }
   };
 
   if (done) return (
@@ -93,12 +90,13 @@ function Appointment() {
 
         {step === 1 && (
           <form onSubmit={submit1} className="card-soft grid gap-5 p-6 md:grid-cols-2 md:p-8" noValidate>
+            <SpamTrap value={trap} onChange={setTrap} />
             <div className="md:col-span-2"><label className={label} htmlFor="name">Full name *</label><input id="name" className="field" value={f.name} onChange={set("name")} maxLength={100} />{err["name"] && <p className="mt-1 text-xs text-destructive">{err["name"]}</p>}</div>
             <div><label className={label} htmlFor="mobile">Mobile *</label>
               <div className="flex"><span className="flex items-center rounded-l-md border border-r-0 border-input bg-muted px-3 text-sm">+91</span>
                 <input id="mobile" inputMode="numeric" className="field rounded-l-none" value={f.mobile} onChange={(e) => setF({ ...f, mobile: e.target.value.replace(/\D/g, "").slice(0, 10) })} /></div>
               {err["mobile"] && <p className="mt-1 text-xs text-destructive">{err["mobile"]}</p>}</div>
-            <div><label className={label} htmlFor="email">Email</label><input id="email" type="email" className="field" value={f.email} onChange={set("email")} />{err["email"] && <p className="mt-1 text-xs text-destructive">{err["email"]}</p>}</div>
+            <div><label className={label} htmlFor="email">Email</label><input id="email" type="email" maxLength={255} className="field" value={f.email} onChange={set("email")} />{err["email"] && <p className="mt-1 text-xs text-destructive">{err["email"]}</p>}</div>
             <div className="md:col-span-2"><label className={label} htmlFor="address">Address</label><input id="address" className="field" value={f.address} onChange={set("address")} maxLength={300} /></div>
             <div className="md:col-span-2"><label className={label} htmlFor="type">Consultation type *</label>
               <select id="type" className="field" value={f.type} onChange={set("type")}><option value="">Select…</option>{TYPES.map((t) => <option key={t}>{t}</option>)}</select>
@@ -145,9 +143,10 @@ function Appointment() {
               ))}
             </dl>
             <p className="mt-6 text-sm text-muted-foreground">Submitting this form does not reserve a slot. Our office will contact you to confirm your appointment. For video consultations, the meeting link is sent by email or WhatsApp after confirmation.</p>
+            {saveError && <p role="alert" className="mt-4 text-sm text-destructive">{saveError}</p>}
             <div className="mt-8 flex flex-wrap justify-between gap-3">
-              <button className="btn-outline" onClick={() => setConfirmView(false)}>Back</button>
-              <button className="btn-primary" onClick={confirm}>Submit request</button>
+              <button disabled={saving} className="btn-outline" onClick={() => setConfirmView(false)}>Back</button>
+              <Button className="btn-primary" disabled={saving} aria-busy={saving} onClick={confirm}>Submit request</Button>
             </div>
           </div>
         )}
