@@ -1,0 +1,1 @@
+CREATE POLICY "Public users cannot access career CVs" ON storage.objects AS RESTRICTIVE FOR ALL TO anon, authenticated USING (bucket_id <> 'career-cvs') WITH CHECK (bucket_id <> 'career-cvs');
