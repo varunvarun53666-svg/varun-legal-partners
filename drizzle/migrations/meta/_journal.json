@@ -8,6 +8,13 @@
       "when": 1793595699433,
       "tag": "0000_create_private_form_submissions",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793696890222,
+      "tag": "0001_lock_private_career_cvs",
+      "breakpoints": true
     }
   ]
 }
