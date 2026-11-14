@@ -40,11 +40,11 @@ const images = {
 
 export function imageForLabel(label: string) {
   const text = label.toLowerCase();
+  if (/\bip\b|intellectual|trademark|brand|startup/.test(text)) return images.ip;
   if (/corporate|companies act|sebi|gst|income tax|llp/.test(text)) return images.corporate;
   if (/property|real estate|land law|koramangala/.test(text)) return images.property;
   if (/employment|labour|rights when employment/.test(text)) return images.employment;
   if (/cyber|digital|online fraud/.test(text)) return images.cyber;
-  if (/\bip\b|intellectual|trademark|brand|startup/.test(text)) return images.ip;
   if (/international|cross.border|nri/.test(text)) return images.international;
   if (/arbitration|mediation|seminar|camp|workshop|moot|client meet/.test(text)) return images.arbitration;
   if (/civil|court|legal blog/.test(text)) return images.civil;

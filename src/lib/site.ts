@@ -3,7 +3,7 @@ export const PHONE_1 = "+91 86182 79621";
 export const PHONE_2 = "+91 94489 33426";
 export const TEL = "tel:+918618279621";
 export const TEL_2 = "tel:+919448933426";
-export const WHATSAPP = "https://wa.me/919740444322?text=" + encodeURIComponent(`Hello ${FIRM_NAME}, I would like to enquire about a legal matter.`);
+export const WHATSAPP = "https://wa.me/919448933426?text=" + encodeURIComponent(`Hello ${FIRM_NAME}, I would like to enquire about a legal matter.`);
 export const EMAIL = "connect@vidyacharanandassociates.com";
 export const HEAD_OFFICE = "#175/1, 3rd Floor, Ananthapura Main Road, Yelahanka New Town, Bengaluru, Karnataka 560064";
 export const OFFICE_LANDMARK = "Near MedPlus Medicals / Singanayakahalli Post Office";
@@ -168,10 +168,11 @@ export const MORE_LINKS = [
   { to: "/terms", label: "Terms & Conditions" },
 ] as const;
 
-export const TEAM = [
+export type TeamMember = { name: string; role: string; area: string; placeholder?: boolean };
+export const TEAM: TeamMember[] = [
   { name: "Adv. Vidyacharan", role: "Founder & Managing Partner", area: "Civil Law" },
-  { name: "Adv. Meera Rao", role: "Senior Associate", area: "Real Estate & Property" },
-  { name: "Adv. Arjun Shetty", role: "Associate", area: "Employment & Labour" },
+  { name: "", role: "", area: "", placeholder: true },
+  { name: "", role: "", area: "", placeholder: true },
 ];
 
 export const TESTIMONIALS = [

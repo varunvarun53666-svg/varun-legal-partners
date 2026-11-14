@@ -62,7 +62,7 @@ function Home() {
       <Slider slides={slides} />
 
       <section className="mx-auto max-w-7xl px-4 py-20">
-        <FadeIn className="text-center"><p className="section-title">Our Expertise</p><h2 className="mt-2 text-3xl md:text-4xl">What we are expert at</h2></FadeIn>
+        <FadeIn className="text-center"><h2 className="text-3xl md:text-4xl">Practice Areas</h2></FadeIn>
         <div className="mt-10 grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
           {PRACTICE_AREAS.map((p, k) => (
             <FadeIn key={p.slug} delay={k * 60}>
