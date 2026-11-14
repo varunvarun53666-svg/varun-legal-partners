@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Briefcase, Building2, FileText, Gavel, Scale, Shield, CheckCircle2 } from "lucide-react";
+import { Briefcase, Building2, ChevronDown, FileText, Gavel, Scale, Shield, CheckCircle2 } from "lucide-react";
 import { FadeIn, PageHero } from "@/components/site/FadeIn";
 import { ImageSlot } from "@/components/site/ImageSlot";
+import { SERVICES_CONTENT, type ServiceGroup, type ServiceItem } from "@/lib/services-content";
 import { FIRM_NAME, PRACTICE_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
@@ -22,16 +23,18 @@ function Practice() {
   return (
     <>
       <PageHero title={a.name} label={`${a.name} banner image`} />
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 pt-16 lg:grid-cols-2">
-        <FadeIn>
-          <h2 className="text-3xl md:text-4xl">{a.name} Services</h2>
-          <ul className="mt-6 space-y-3 text-muted-foreground">
-            {a.highlights.map((h) => <li key={h} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber" />{h}</li>)}
-          </ul>
-        </FadeIn>
-        <FadeIn delay={120}>
-          <ImageSlot label={`${a.name} services image`} className="aspect-[4/3] rounded-xl" />
-        </FadeIn>
+      <section className="mx-auto max-w-7xl px-4 pt-16">
+        <div className="grid gap-10 lg:grid-cols-[2fr_1fr] lg:items-start">
+          <FadeIn className="lg:col-start-1">
+            <h2 className="text-3xl md:text-4xl">{a.name} Services</h2>
+          </FadeIn>
+          <FadeIn delay={120} className="lg:sticky lg:top-24 lg:col-start-2 lg:row-span-2">
+            <ImageSlot label={`${a.name} services image`} className="aspect-[4/3] rounded-xl" />
+          </FadeIn>
+          <FadeIn className="lg:col-start-1">
+            <ServicesContent slug={a.slug} highlights={a.highlights} />
+          </FadeIn>
+        </div>
       </section>
       <section className="mx-auto max-w-3xl px-4 pt-16 text-center">
         <p className="section-title">Practice Area</p>
@@ -55,5 +58,54 @@ function Practice() {
       </section>
       <div className="pb-20 text-center"><Link to="/appointment" className="btn-primary">Request a consultation</Link></div>
     </>
+  );
+}
+
+function ItemText({ item }: { item: ServiceItem }) {
+  if (typeof item === "string") return <>{item}</>;
+  return <><strong className="font-semibold text-foreground">{item.lead}</strong> — {item.text}</>;
+}
+
+function ServicesContent({ slug, highlights }: { slug: string; highlights: string[] }) {
+  const groups: ServiceGroup[] | undefined = SERVICES_CONTENT[slug];
+  if (!groups) {
+    return (
+      <ul className="space-y-3 text-muted-foreground">
+        {highlights.map((h) => <li key={h} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber" />{h}</li>)}
+      </ul>
+    );
+  }
+  let categoryIndex = 0;
+  return (
+    <div className="space-y-8">
+      {groups.map((group, gi) => (
+        <div key={group.title ?? gi} className="space-y-4">
+          {group.title && (
+            <h3 className="border-b-2 border-amber pb-2 text-2xl">{group.title}</h3>
+          )}
+          {group.categories.map((category) => {
+            const isFirst = categoryIndex === 0;
+            categoryIndex += 1;
+            const TitleTag = group.title ? "h4" : "h3";
+            return (
+              <details key={category.title} open={isFirst} className="card-soft group p-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                  <TitleTag className="text-lg md:text-xl">{category.title}</TitleTag>
+                  <ChevronDown className="h-5 w-5 shrink-0 text-amber transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <ul className="mt-4 space-y-3 text-muted-foreground">
+                  {category.items.map((item, i) => (
+                    <li key={i} className="flex gap-2">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber" aria-hidden="true" />
+                      <span><ItemText item={item} /></span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            );
+          })}
+        </div>
+      ))}
+    </div>
   );
 }
