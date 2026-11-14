@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Briefcase, Building2, FileText, Gavel, Scale, Shield, CheckCircle2 } from "lucide-react";
+import { Briefcase, Building2, ChevronDown, FileText, Gavel, Scale, Shield, CheckCircle2 } from "lucide-react";
 import { FadeIn, PageHero } from "@/components/site/FadeIn";
 import { ImageSlot } from "@/components/site/ImageSlot";
+import { SERVICES_CONTENT, type ServiceGroup, type ServiceItem } from "@/lib/services-content";
 import { FIRM_NAME, PRACTICE_AREAS } from "@/lib/site";
 import { seo } from "@/lib/seo";
 
