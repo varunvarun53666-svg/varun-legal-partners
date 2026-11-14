@@ -60,3 +60,52 @@ function Practice() {
     </>
   );
 }
+
+function ItemText({ item }: { item: ServiceItem }) {
+  if (typeof item === "string") return <>{item}</>;
+  return <><strong className="font-semibold text-foreground">{item.lead}</strong> — {item.text}</>;
+}
+
+function ServicesContent({ slug, highlights }: { slug: string; highlights: string[] }) {
+  const groups: ServiceGroup[] | undefined = SERVICES_CONTENT[slug];
+  if (!groups) {
+    return (
+      <ul className="space-y-3 text-muted-foreground">
+        {highlights.map((h) => <li key={h} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber" />{h}</li>)}
+      </ul>
+    );
+  }
+  let categoryIndex = 0;
+  return (
+    <div className="space-y-8">
+      {groups.map((group, gi) => (
+        <div key={group.title ?? gi} className="space-y-4">
+          {group.title && (
+            <h3 className="border-b-2 border-amber pb-2 text-2xl">{group.title}</h3>
+          )}
+          {group.categories.map((category) => {
+            const isFirst = categoryIndex === 0;
+            categoryIndex += 1;
+            const TitleTag = group.title ? "h4" : "h3";
+            return (
+              <details key={category.title} open={isFirst} className="card-soft group p-5">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
+                  <TitleTag className="text-lg md:text-xl">{category.title}</TitleTag>
+                  <ChevronDown className="h-5 w-5 shrink-0 text-amber transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+                </summary>
+                <ul className="mt-4 space-y-3 text-muted-foreground">
+                  {category.items.map((item, i) => (
+                    <li key={i} className="flex gap-2">
+                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber" aria-hidden="true" />
+                      <span><ItemText item={item} /></span>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
