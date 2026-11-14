@@ -105,11 +105,18 @@ function Home() {
           <div className="text-center"><p className="section-title">Our Team</p><h2 className="mt-2 text-3xl md:text-4xl">Meet our advocates</h2></div>
           <div className="mt-10 mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
             {TEAM.map((t, k) => (
-              <FadeIn key={t.name} delay={k * 80}>
-                <Link to="/associates" className="card-soft block overflow-hidden text-center hover:-translate-y-1">
-                  <ImageSlot label={`Photo of ${t.name}`} className="aspect-square" />
-                  <div className="p-4"><h3 className="text-lg">{t.name}</h3><p className="text-sm text-muted-foreground">{t.role}</p></div>
-                </Link>
+              <FadeIn key={t.name || `team-placeholder-${k}`} delay={k * 80}>
+                {t.placeholder ? (
+                  <div className="card-soft block overflow-hidden text-center" aria-hidden>
+                    <div className="aspect-square border-2 border-dashed border-navy/20 bg-muted/40" />
+                    <div className="p-4"><h3 className="text-lg">&nbsp;</h3><p className="text-sm">&nbsp;</p></div>
+                  </div>
+                ) : (
+                  <Link to="/associates" className="card-soft block overflow-hidden text-center hover:-translate-y-1">
+                    <ImageSlot label={`Photo of ${t.name}`} className="aspect-square" />
+                    <div className="p-4"><h3 className="text-lg">{t.name}</h3><p className="text-sm text-muted-foreground">{t.role}</p></div>
+                  </Link>
+                )}
               </FadeIn>
             ))}
           </div>
