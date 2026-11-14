@@ -15,7 +15,7 @@ describe("Client's real details", () => {
   });
   it("uses the dedicated WhatsApp destination and greeting", () => {
     const url = new URL(WHATSAPP);
-    expect(url.pathname).toBe("/919740444322");
+    expect(url.pathname).toBe("/919448933426");
     expect(url.searchParams.get("text")).toBe("Hello Vidyacharan & Associates, I would like to enquire about a legal matter.");
   });
   it("uses the client's email", () => {

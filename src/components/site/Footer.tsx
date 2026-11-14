@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
+import { Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import { Logo } from "./Logo";
 import { FIRM_NAME, EMAIL, HEAD_OFFICE, OFFICE_LANDMARK, MAP_LINK, OFFICE_HOURS_SHORT, PHONE_1, PHONE_2, TEL, TEL_2, PRACTICE_AREAS } from "@/lib/site";
 
@@ -28,11 +28,11 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className={h}>Social</h3>
+          <h3 className={h}>Social Media</h3>
           <div className="flex gap-3">
-            {[[Instagram, "Instagram", "https://instagram.com"], [Youtube, "YouTube", "https://youtube.com"], [Linkedin, "LinkedIn", "https://linkedin.com"]].map(([Icon, l, href]) => {
+            {[[Instagram, "Instagram", "https://instagram.com"], [Youtube, "YouTube", "https://youtube.com"], [Linkedin, "LinkedIn", "https://linkedin.com"], [Facebook, "Facebook", "https://facebook.com"]].map(([Icon, l, href]) => {
               const I = Icon as typeof Instagram;
-              return <a key={l as string} href={href as string} target="_blank" rel="noreferrer" aria-label={l as string}
+              return <a key={l as string} href={href as string} target="_blank" rel="noreferrer noopener" aria-label={l as string}
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-foreground/10 transition-colors hover:bg-amber hover:text-navy"><I className="h-5 w-5" /></a>;
             })}
           </div>
