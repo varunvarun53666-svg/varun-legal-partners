@@ -6,3 +6,5 @@
 - [x] Show one office and update news placeholder.
 - [x] Update office hours, preferred starts and required consultation method.
 - [x] Update request wording and terms; verify tests, pages and stale-reference search.
+- [x] Add best-effort server-only Sheets copies and mocked payload/failure tests.
+- [ ] Configure Sheets webhook secrets (awaiting secure entry).
