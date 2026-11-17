@@ -55,12 +55,17 @@ export const submitCareer = createServerFn({ method: "POST" })
       const contentType = ext === "pdf" ? "application/pdf" : ext === "doc" ? "application/msword" : "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
       const { error: uploadError } = await supabaseAdmin.storage.from("career-cvs").upload(path, bytes, { contentType, upsert: false });
       if (uploadError) return { ok: false, error: SAVE_ERROR };
+      let cvLink: string | undefined;
+      try {
+        const { data: signed, error: signError } = await supabaseAdmin.storage.from("career-cvs").createSignedUrl(path, 2592000);
+        if (!signError && signed?.signedUrl) cvLink = signed.signedUrl;
+      } catch { /* A missing download link must not prevent saving the application. */ }
       const { name, email, phone, role } = parsed.data;
       try {
         const { error } = await supabaseAdmin.from("career_applications").insert({ name, email, phone, position: role, message: "", cv_file_path: path });
         if (!error) {
           const { copySubmissionToSheets } = await import("@/lib/sheets-webhook.server");
-          await copySubmissionToSheets({ type: "career", data: { name, email, phone, position: role, cv_file_path: path, status: "new" } });
+          await copySubmissionToSheets({ type: "career", data: { name, email, phone, position: role, cv_file_path: path, ...(cvLink ? { cv_link: cvLink } : {}), status: "new" } });
           return { ok: true };
         }
       } catch { /* Remove the orphaned private file when the record cannot be saved. */ }

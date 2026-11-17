@@ -2,7 +2,7 @@ type CommonFields = { name: string; phone: string; email: string; status: string
 export type SheetsSubmission =
   | { type: "appointment"; data: CommonFields & { practice_area: string; method: string; preferred_date: string; preferred_time: string; notes: string } }
   | { type: "contact"; data: CommonFields & { message: string } }
-  | { type: "career"; data: CommonFields & { position: string; cv_file_path: string } };
+  | { type: "career"; data: CommonFields & { position: string; cv_file_path: string; cv_link?: string } };
 
 // Database success is authoritative; this convenience copy must never reject.
 export async function copySubmissionToSheets(submission: SheetsSubmission): Promise<void> {
