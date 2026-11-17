@@ -11,6 +11,8 @@ export const submitAppointment = createServerFn({ method: "POST" })
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
       const { error } = await supabaseAdmin.from("appointment_requests").insert({ name, mobile: `+91${mobile}`, email: email || null, address: address || null, consultation_type: type, consultation_method: method, preferred_date, preferred_time, notes: notes || null });
       if (error) return { ok: false, error: SAVE_ERROR };
+      const { copySubmissionToSheets } = await import("@/lib/sheets-webhook.server");
+      await copySubmissionToSheets({ type: "appointment", data: { name, phone: `+91${mobile}`, email, practice_area: type, method, preferred_date, preferred_time, notes, status: "pending" } });
       return { ok: true };
     } catch { return { ok: false, error: SAVE_ERROR }; }
   });
@@ -25,6 +27,8 @@ export const submitContact = createServerFn({ method: "POST" })
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
       const { error } = await supabaseAdmin.from("contact_messages").insert(record);
       if (error) return { ok: false, error: SAVE_ERROR };
+      const { copySubmissionToSheets } = await import("@/lib/sheets-webhook.server");
+      await copySubmissionToSheets({ type: "contact", data: { ...record, status: "new" } });
       return { ok: true };
     } catch { return { ok: false, error: SAVE_ERROR }; }
   });
@@ -54,7 +58,11 @@ export const submitCareer = createServerFn({ method: "POST" })
       const { name, email, phone, role } = parsed.data;
       try {
         const { error } = await supabaseAdmin.from("career_applications").insert({ name, email, phone, position: role, message: "", cv_file_path: path });
-        if (!error) return { ok: true };
+        if (!error) {
+          const { copySubmissionToSheets } = await import("@/lib/sheets-webhook.server");
+          await copySubmissionToSheets({ type: "career", data: { name, email, phone, position: role, cv_file_path: path, status: "new" } });
+          return { ok: true };
+        }
       } catch { /* Remove the orphaned private file when the record cannot be saved. */ }
       await supabaseAdmin.storage.from("career-cvs").remove([path]);
       return { ok: false, error: SAVE_ERROR };
