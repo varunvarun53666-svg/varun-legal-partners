@@ -1,5 +1,5 @@
-// @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { File as NodeFile } from "node:buffer";
 
 const { insert, upload, remove } = vi.hoisted(() => ({ insert: vi.fn(), upload: vi.fn(), remove: vi.fn() }));
 vi.mock("@tanstack/react-start", () => ({
@@ -17,6 +17,13 @@ const appointment = submitAppointment as unknown as Handler;
 const contact = submitContact as unknown as Handler;
 const career = submitCareer as unknown as Handler;
 const common = { name: "Test Visitor", email: "test@example.com", phone: "9876543210" };
+// jsdom's File lacks arrayBuffer; use real file bytes with a minimal multipart container.
+class TestFormData {
+  private values = new Map<string, string | NodeFile>();
+  set(key: string, value: string | NodeFile) { this.values.set(key, value); }
+  get(key: string) { return this.values.get(key) ?? null; }
+  entries() { return this.values.entries(); }
+}
 const appointmentInput = { name: common.name, mobile: common.phone, email: common.email, address: "Test office", type: "Civil Law", method: "In person at our office", preferred_date: "2099-11-02", preferred_time: "10:00 AM", notes: "Consultation enquiry", trap: "" };
 function careerInput() {
   const data = new FormData();
@@ -32,6 +39,8 @@ describe("Best-effort Sheets copies after database saving", () => {
     vi.stubEnv("SHEETS_WEBHOOK_URL", "https://example.invalid/webhook");
     vi.stubEnv("SHEETS_WEBHOOK_SECRET", "test-only-credential");
     vi.stubGlobal("fetch", fetchMock);
+    vi.stubGlobal("File", NodeFile);
+    vi.stubGlobal("FormData", TestFormData);
     fetchMock.mockResolvedValue(new Response("ok"));
     insert.mockResolvedValue({ error: null });
     upload.mockResolvedValue({ error: null });
