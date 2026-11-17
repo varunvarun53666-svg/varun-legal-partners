@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { File as NodeFile } from "node:buffer";
 
-const { insert, upload, remove } = vi.hoisted(() => ({ insert: vi.fn(), upload: vi.fn(), remove: vi.fn() }));
+const { insert, upload, remove, createSignedUrl } = vi.hoisted(() => ({ insert: vi.fn(), upload: vi.fn(), remove: vi.fn(), createSignedUrl: vi.fn() }));
 vi.mock("@tanstack/react-start", () => ({
   createServerFn: () => ({ inputValidator: () => ({ handler: (handler: unknown) => handler }) }),
 }));
 vi.mock("@/integrations/supabase/client.server", () => ({
-  supabaseAdmin: { from: () => ({ insert }), storage: { from: () => ({ upload, remove }) } },
+  supabaseAdmin: { from: () => ({ insert }), storage: { from: () => ({ upload, remove, createSignedUrl }) } },
 }));
 
 import { submitAppointment, submitContact, submitCareer } from "@/lib/submissions.functions";
@@ -44,6 +44,7 @@ describe("Best-effort Sheets copies after database saving", () => {
     fetchMock.mockResolvedValue(new Response("ok"));
     insert.mockResolvedValue({ error: null });
     upload.mockResolvedValue({ error: null });
+    createSignedUrl.mockResolvedValue({ data: { signedUrl: "https://example.invalid/private-cv-download" }, error: null });
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
   afterEach(() => { vi.useRealTimers(); vi.unstubAllEnvs(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
@@ -61,9 +62,21 @@ describe("Best-effort Sheets copies after database saving", () => {
     expect(await contact({ data: { ...common, message: "A legal enquiry", trap: "" } })).toEqual({ ok: true });
     expect(JSON.parse(fetchMock.mock.calls[0]?.[1].body)).toEqual({ secret: "test-only-credential", type: "contact", data: { ...common, message: "A legal enquiry", status: "new" } });
   });
-  it("posts a career path only, never the CV file", async () => {
+  it("posts the career path and a 30-day signed link, never the CV file", async () => {
+    expect(await career({ data: careerInput() })).toEqual({ ok: true });
+    expect(createSignedUrl).toHaveBeenCalledWith(upload.mock.calls[0]?.[0], 2592000);
+    expect(upload.mock.invocationCallOrder[0]).toBeLessThan(createSignedUrl.mock.invocationCallOrder[0] ?? 0);
+    expect(createSignedUrl.mock.invocationCallOrder[0]).toBeLessThan(insert.mock.invocationCallOrder[0] ?? 0);
+    expect(JSON.parse(fetchMock.mock.calls[0]?.[1].body)).toEqual({ secret: "test-only-credential", type: "career", data: { ...common, position: "Legal Intern", cv_file_path: upload.mock.calls[0]?.[0], cv_link: "https://example.invalid/private-cv-download", status: "new" } });
+    expect(console.error).not.toHaveBeenCalled();
+  });
+  it.each(["error", "throw"])("omits the CV link and preserves success on signing %s", async (failure) => {
+    if (failure === "error") createSignedUrl.mockResolvedValue({ data: null, error: { message: "Signing failed" } });
+    else createSignedUrl.mockRejectedValue(new Error("Signing failed"));
     expect(await career({ data: careerInput() })).toEqual({ ok: true });
     expect(JSON.parse(fetchMock.mock.calls[0]?.[1].body)).toEqual({ secret: "test-only-credential", type: "career", data: { ...common, position: "Legal Intern", cv_file_path: upload.mock.calls[0]?.[0], status: "new" } });
+    expect(remove).not.toHaveBeenCalled();
+    expect(console.error).not.toHaveBeenCalled();
   });
   it("keeps every submission successful on fetch failure and preserves its CV", async () => {
     fetchMock.mockRejectedValue(new Error("request failed"));
