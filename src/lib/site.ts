@@ -168,11 +168,11 @@ export const MORE_LINKS = [
   { to: "/terms", label: "Terms & Conditions" },
 ] as const;
 
-export type TeamMember = { name: string; role: string; area: string; placeholder?: boolean };
+export type TeamMember = { name: string; role: string; area: string };
 export const TEAM: TeamMember[] = [
   { name: "Adv. Vidyacharan", role: "Founder & Managing Partner", area: "Civil Law" },
-  { name: "", role: "", area: "", placeholder: true },
-  { name: "", role: "", area: "", placeholder: true },
+  { name: "", role: "", area: "" },
+  { name: "", role: "", area: "" },
 ];
 
 export const TESTIMONIALS = [

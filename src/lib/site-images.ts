@@ -25,6 +25,7 @@ import corporateCard from "@/assets/corporate-card.webp";
 import officeWide from "@/assets/office-wide.webp";
 import officeMobile from "@/assets/office-mobile.webp";
 import officeCard from "@/assets/office-card.webp";
+import teamPlaceholder from "@/assets/team-placeholder-portrait.png";
 
 const images = {
   civil: { wide: civilWide, mobile: civilMobile, card: civilCard, alt: "Brass scales of justice, a gavel and navy law books in an empty courtroom." },
@@ -36,10 +37,12 @@ const images = {
   arbitration: { wide: arbitrationWide, mobile: arbitrationMobile, card: arbitrationCard, alt: "An empty negotiation room with navy chairs and folders around a white meeting table." },
   corporate: { wide: corporateWide, mobile: corporateMobile, card: corporateCard, alt: "A navy company register, brass seal, board documents and a fountain pen on a boardroom table." },
   office: { wide: officeWide, mobile: officeMobile, card: officeCard, alt: "An empty law office with navy bookcases, a white desk, brass scales and an amber lamp." },
+  teamPlaceholder: { wide: teamPlaceholder, mobile: teamPlaceholder, card: teamPlaceholder, alt: "Neutral placeholder portrait: a generic navy silhouette of a person on a white background." },
 };
 
 export function imageForLabel(label: string) {
   const text = label.toLowerCase();
+  if (/team placeholder portrait/.test(text)) return images.teamPlaceholder;
   if (/\bip\b|intellectual|trademark|brand|startup/.test(text)) return images.ip;
   if (/corporate|companies act|sebi|gst|income tax|llp/.test(text)) return images.corporate;
   if (/property|real estate|land law|koramangala/.test(text)) return images.property;
